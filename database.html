@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>  
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">资料库</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="database_1.html">
+							推荐
+						</a>
+						<a class="mui-control-item" href="#item2mobile" data-wid="database_2.html">
+							楷书
+						</a>
+						<a class="mui-control-item" href="#item3mobile" data-wid="database_3.html">
+							草书
+						</a>
+						<a class="mui-control-item" href="#item4mobile" data-wid="database_4.html">
+							行书
+						</a>
+						<a class="mui-control-item" href="#item5mobile" data-wid="database_5.html">
+							篆书
+						</a>
+						<a class="mui-control-item" href="#item6mobile" data-wid="database_6.html">
+							隶书
+						</a>
+						<a class="mui-control-item" href="#item7mobile" data-wid="database_7.html">
+							魏碑
+						</a>
+						<a class="mui-control-item" href="#item8mobile" data-wid="database_8.html">
+							其他
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script src="js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script>
+		mui.init(
+
+		);
+		mui.plusReady(function() {
+			var group = new webviewGroup(plus.webview.currentWebview().id, {
+				items: [{
+					id: "database_1.html",
+					url: "database_1.html",
+					extras: {}
+				}, {
+					id: "database_2.html",
+					url: "database_2.html",
+					extras: {}
+				}, {
+					id: "database_3.html",
+					url: "database_3.html",
+					extras: {}
+				}, {
+					id: "database_4.html",
+					url: "database_4.html",
+					extras: {}
+				}, {
+					id: "database_5.html",
+					url: "database_5.html",
+					extras: {}
+				}, {
+					id: "database_6.html",
+					url: "database_6.html",
+					extras: {}
+				}, {
+					id: "database_7.html",
+					url: "database_7.html",
+					extras: {}
+				},{
+					id: "database_8.html",
+					url: "database_8.html",
+					extras: {}
+				}],
+				onChange: function(obj) {
+					var c = document.querySelector(".mui-control-item.mui-active");
+					if(c) {
+						c.classList.remove("mui-active");
+					}
+					document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")").classList.add("mui-active");
+				}
+			});
+			mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+				var wid = this.getAttribute("data-wid");
+				group.switchTab(wid);
+			});
+		});
+	</script>
+
+</html>

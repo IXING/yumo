@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">壁纸下载</h1>
+		</header>
+		<div style="height: 50px;"></div>
+		<div class="bizhi_dow">
+			<img id="bizhi_content" src="" />
+		</div>
+		<!--底部按钮-->
+		<div class="bottom_box">
+			<div class="bottom_box_h">
+				<div class="bizhi_btn">
+					<div id="setbizhi" class="bizhi_float">
+						设为壁纸
+					</div>
+					<div id="dowbizhi" class="bizhi_float">
+						下载
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		mui.plusReady(function() {
+			mui.init();
+			var self = plus.webview.currentWebview();
+			var contentid = self.contentid;
+
+			var iimgurl = '';
+			var url = "http://www.zjliang.com/index.php/Gapi/Bizhi/";
+			mui.ajax(url, {
+				data: {
+					id: contentid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					var cid = obo[0].id,
+						cbizhi_cimg = obo[0].cimg;
+					var obizhi_content = document.getElementById("bizhi_content");
+					obizhi_content.src = cbizhi_cimg;
+					iimgurl = cbizhi_cimg;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+
+			function setwallpaper(imgurl) {
+				var WallpaperManager = plus.android.importClass("android.app.WallpaperManager");
+				var Main = plus.android.runtimeMainActivity();
+				var wallpaperManager = WallpaperManager.getInstance(Main);
+				plus.android.importClass(wallpaperManager);
+				var BitmapFactory = plus.android.importClass("android.graphics.BitmapFactory");
+				var url = imgurl; // 换成要设置的壁纸图片路径
+				var path = plus.io.convertLocalFileSystemURL(url);
+				var bitmap = BitmapFactory.decodeFile(path);
+				try {
+
+					wallpaperManager.setBitmap(bitmap);
+					bitmap.recycle(); // 设置完毕桌面要进行 原生层的BITMAP回收 减少内存压力
+				} catch(e) {
+					//TODO handle the exception
+				}
+			}
+			// 创建下载任务
+			function createDownload(uimgurl) {
+				var dtask = plus.downloader.createDownload(uimgurl, {}, function(d, status) {
+					// 下载完成
+					if(status == 200) {
+						setwallpaper(d.filename);
+						wt.close();
+						plus.nativeUI.toast("设置完成");
+					} else {
+						wt.close();
+						plus.nativeUI.toast("下载失败");
+					}
+				});
+				dtask.start();
+			}
+			// 创建下载任务
+			function createDownload2(uimgurl) {
+				var dtask = plus.downloader.createDownload(uimgurl, {}, function(d, status) {
+					// 下载完成
+					if(status == 200) {
+						plus.gallery.save(d.filename, '', '')
+						wt.close();
+						plus.nativeUI.toast("下载完成");
+					} else {
+						wt.close();
+						plus.nativeUI.toast("下载失败");
+					}
+				});
+				dtask.start();
+			}
+			var osetbizhi = document.getElementById("setbizhi");
+			osetbizhi.addEventListener("tap", function() {
+				wt = plus.nativeUI.showWaiting('设置中...');
+				createDownload(iimgurl);
+			})
+			var osetbizhi = document.getElementById("dowbizhi");
+			osetbizhi.addEventListener("tap", function() {
+				wt = plus.nativeUI.showWaiting('下载中...');
+				createDownload2(iimgurl);
+			})
+
+		});
+	</script>
+
+</html>

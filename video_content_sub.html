@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>
+	<!--var ocontent_curl = document.getElementById("ocontent_curl");
+					var ocontent_title = document.getElementById("ocontent_title");
+					var ocontent_browse = document.getElementById("ocontent_browse");
+					var ocontent_comments = document.getElementById("ocontent_comments");
+					var ocontent_zan = document.getElementById("ocontent_zan");-->
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="big_box">
+					<div class="big_box_p">
+						<div class="video_list_box">
+							<div class="video_list2">
+								<!--<a href="video_content.html">-->
+								<div class="video_img2">
+									<!--<img src="images/video_list.png" />-->
+									<iframe id="ocontent_curl" runat="server" src="" width="100%" height="200" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" allowfullscreen></iframe>
+								</div>
+								<div class="video_text2">
+									<div class="video_name2">
+										<!--毛笔字教程-->
+										第<span id="ocontent_name"></span>集：<span id="ocontent_title"></span>
+									</div>
+									<div class="video_detaile2">
+										浏览/&nbsp;<span id="ocontent_browse"></span>&nbsp;&nbsp;评论/&nbsp;<span id="ocontent_comments"></span>&nbsp;&nbsp;赞/&nbsp;<span id="ocontent_zan"></span>
+									</div>
+								</div>
+								<!--</a>-->
+							</div>
+						</div>
+						<div class="video_a_box">
+							<div class="video_a_title">
+								选集
+							</div>
+							<div class="video_a_list_box">
+								<ul id="olist">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--点赞-->
+				<div id="video_zan" class="article_zan">
+					<div class="article_zan_bg">
+						<img src="images/zan_bg.png" />
+					</div>
+					<div class="article_zan_icon">
+						<img src="images/zan_icon.png" />
+					</div>
+					<div id="ocontent_zan2" class="article_zan_namble">
+						<!--120-->
+					</div>
+				</div>
+				<!--评论-->
+				<div class="big_box">
+					<div class="daily_title_p">
+						<div class="daily_title">
+							<img src="images/comments_title.png" />
+						</div>
+					</div>
+					<div class="big_box_p">
+						<!--评论内容-->
+						<div id="hot" class="comments_list_box">
+							<!--<div class="comments_list">
+								<div class="comments_list_p">
+									<div class="comments_user_name">
+										良雨工作室
+									</div>
+									<div class="comments_user_time">
+										2017年12月11日
+									</div>
+									<div class="comments_user_text">
+										你猜我说的什么你猜我说的什么你猜我说的什么你猜我说的什么你猜我说的什么。。。
+									</div>
+									<div class="comments_user_huifu">
+										回复
+									</div>
+									<div class="comments_user_logo">
+										<img src="images/user_img2.png" />
+									</div>
+									<div class="comments_user_zan">
+										<div class="comments_user_zan_nb">
+											<div class="comments_user_zan_float">100</div>
+											<div class="comments_user_zan_float comments_user_zan_icon"><img src="images/zan.png"></div>
+										</div>
+									</div>
+
+								</div>
+							</div>-->
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div style="height: 50px;"></div>
+		<!--添加评论-->
+		<div class="add_comment">
+			<div class="add_input">
+				<input id="addcomment" type="text" />
+			</div>
+			<div class="add_btn">
+				<button id="addbtn" type="button" class="mui-btn mui-btn-block mui-btn-blue">评论</button>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script>
+		mui.plusReady(function() {
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+
+			window.addEventListener("fullscreenchange", function() {
+				if(isFullscreen) {
+					console.log(1);
+				} else {
+					console.log(2);
+				}
+			});
+
+			var self = plus.webview.currentWebview();
+			var contentid = self.contentid;
+			//			console.log(contentid);
+
+			//			var cbrowse = self.cbrowse;
+			//			var ccomments = self.ccomments;
+			//			var czan = self.czan;
+			var ocontent_browse = document.getElementById("ocontent_browse");
+			var ocontent_comments = document.getElementById("ocontent_comments");
+			var ocontent_zan = document.getElementById("ocontent_zan");
+			var ocontent_zan2 = document.getElementById("ocontent_zan2");
+			var namble_czan = '';
+			var url = "http://www.zjliang.com/index.php/Gapi/Video/contentna.html";
+			mui.ajax(url, {
+				data: {
+					content_id: contentid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					var cbrowse = obo[0].browse,
+						ccomments = obo[0].comments,
+						czan = obo[0].zan;
+					namble_czan = czan;
+					ocontent_browse.innerHTML = cbrowse;
+					ocontent_comments.innerHTML = ccomments;
+					ocontent_zan.innerHTML = czan;
+					ocontent_zan2.innerHTML = czan;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+				}
+			});
+
+			//			var currentid = '';
+			//			console.log(contentid);
+
+			var url = "http://www.zjliang.com/index.php/Gapi/Video/content.html";
+			mui.ajax(url, {
+				data: {
+					inid: contentid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					var ccontent_curl = obo[0].curl,
+						ccontent_name = obo[0].name,
+						ccontent_title = obo[0].title;
+					//						ccontent_browse = parseInt(obo[0].browse) + 1,
+					//						ccontent_comments = obo[0].comments,
+					//						ccontent_zan = obo[0].zan;
+
+					//						第一集浏览加1
+					//					onbrowse(obo[0].id);
+
+					//					currentid = obo[0].id;
+					var ocontent_curl = document.getElementById("ocontent_curl");
+					var ocontent_title = document.getElementById("ocontent_title");
+					var ocontent_name = document.getElementById("ocontent_name");
+					//					var ocontent_browse = document.getElementById("ocontent_browse");
+					//					var ocontent_comments = document.getElementById("ocontent_comments");
+					//					var ocontent_zan = document.getElementById("ocontent_zan");
+					//					var ocontent_zan2 = document.getElementById("ocontent_zan2");
+
+					ocontent_curl.src = ccontent_curl;
+					ocontent_name.innerHTML = ccontent_name;
+					ocontent_title.innerHTML = ccontent_title;
+					//					ocontent_browse.innerHTML = ccontent_browse;
+					//					ocontent_comments.innerHTML = ccontent_comments;
+					//					ocontent_zan.innerHTML = ccontent_zan;
+					//					ocontent_zan2.innerHTML = ccontent_zan;
+
+					var olist = document.getElementById("olist");
+					mui.each(obo, function(index, item) {
+						var cid = item.id,
+							ccontent_name = item.name;
+						//						console.log(cid);
+						li = document.createElement('li');
+						li.innerHTML =
+							'<a data-id=' + cid + ' href="video_content.html">' +
+							ccontent_name +
+							'</a>';
+						olist.appendChild(li);
+					});
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+				}
+			});
+
+			//			function onbrowse(inid) {
+			//				var url = "http://www.zjliang.com/index.php/Gapi/Video/icontent.html/";
+			//				mui.ajax(url, {
+			//					data: {
+			//						oid: inid
+			//					},
+			//					dataType: 'json', //服务器返回json格式数据
+			//					type: 'post', //HTTP请求类型
+			//					timeout: 10000, //超时时间设置为10秒；
+			//					success: function(data) {
+			//						var obo = eval(data);
+			//						//						console.log('b+1') 
+			//					},
+			//					error: function(xhr, type, errorThrown) {
+			//						console.log(type);
+			//					}
+			//				});
+			//			}
+			//			更换选集
+			mui('#olist').on('tap', 'a', function() {
+				var icontentid = this.getAttribute("data-id");
+				//				var contentid = this.getAttribute('data-id'); 
+				//				var id = this.getAttribute("href");
+				var href = this.getAttribute('href');
+				//				console.log(contentid);
+				console.log(icontentid);
+				var url = "http://www.zjliang.com/index.php/Gapi/Video/icontent.html/";
+				mui.ajax(url, {
+					data: {
+						oid: icontentid
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var ccontent_curl = obo[0].curl,
+							ccontent_name = obo[0].name,
+							ccontent_title = obo[0].title;
+						//							ccontent_browse = obo[0].browse,
+						//							ccontent_comments = obo[0].comments,
+						//							ccontent_zan = obo[0].zan;
+
+						var ocontent_curl = document.getElementById("ocontent_curl");
+						var ocontent_title = document.getElementById("ocontent_title");
+						var ocontent_name = document.getElementById("ocontent_name");
+						//						var ocontent_browse = document.getElementById("ocontent_browse");
+						//						var ocontent_comments = document.getElementById("ocontent_comments");
+						//						var ocontent_zan = document.getElementById("ocontent_zan");
+						//						var ocontent_zan2 = document.getElementById("ocontent_zan2");
+
+						ocontent_curl.src = ccontent_curl;
+						ocontent_name.innerHTML = ccontent_name;
+						ocontent_title.innerHTML = ccontent_title;
+						//						ocontent_browse.innerHTML = ccontent_browse;
+						//						ocontent_comments.innerHTML = ccontent_comments;
+						//						ocontent_zan.innerHTML = ccontent_zan;
+						//						ocontent_zan2.innerHTML = ccontent_zan;
+
+						//					ocontent_user_name.innerHTML = ccontent_user_name;
+						//					ocontent_user_img.src = ccontent_user_img;
+
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log(type);
+					}
+				});
+			});
+
+			var ifirst = 0; //开始条数
+			var ilast = 10; //结束条数
+			var maxid = 0;
+			//			跟帖数据
+
+			var url = "http://www.zjliang.com/index.php/Gapi/Comment/videoindex.html";
+			//			console.log(contentid);
+			mui.ajax(url, {
+				data: {
+					content_id: contentid, //获取文章id
+					first: ifirst,
+					last: ilast
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					maxid = obo[0].id;
+					var list = document.getElementById("hot");
+					mui.each(obo, function(index, item) {
+						var cid = item.id,
+							time = item.time,
+							content = item.content,
+							zan = item.zan,
+							user_img = item.user_img,
+							user_name = item.user_name;
+						odiv = document.createElement('div');
+						odiv.className = 'comments_list';
+						odiv.innerHTML = '<div class="comments_list_p">' +
+							'<div class="comments_user_name">' +
+							user_name +
+							'</div>' +
+							'<div class="comments_user_time">' +
+							time +
+							'</div>' +
+							'<div class="comments_user_text">' +
+							content +
+							'</div>' +
+							'<div data-name=' + user_name + ' class="comments_user_huifu">' +
+							'回复' +
+							'</div>' +
+							'<div class="comments_user_logo">' +
+							'<img src="' + user_img + '"/>' +
+							'</div>' +
+							'<div data-id=' + cid + ' data-wzan=' + zan + ' class="comments_user_zan">' +
+							'<div class="comments_user_zan_nb">' +
+							'<div id="zan_' + parseInt(cid) + '" class="comments_user_zan_float">' + zan + '</div>' +
+							'<div class="comments_user_zan_float comments_user_zan_icon"><img src="images/zan.png"></div>' +
+							'</div>' +
+							'</div>' +
+							'</div>';
+						list.appendChild(odiv);
+					});
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+
+			function pulldownRefresh() {
+				setTimeout(function() {
+					//					代码位置
+					//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					var url = "http://www.zjliang.com/index.php/Gapi/Comment/videotwo.html";
+
+					mui.ajax(url, {
+						data: {
+							content_id: contentid, //获取文章id 
+							maxid: maxid,
+							//							first: cells.length
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							var obo = eval(data);
+							var list = document.getElementById("hot");
+							//							var macidl = obo.length;
+							mui.each(obo, function(index, item) {
+								var cid = item.id,
+									time = item.time,
+									content = item.content,
+									zan = item.zan,
+									user_img = item.user_img,
+									user_name = item.user_name;
+
+								maxid = cid;
+								odiv = document.createElement('div');
+								odiv.className = 'comments_list';
+								odiv.innerHTML = '<div class="comments_list_p">' +
+									'<div class="comments_user_name">' +
+									user_name +
+									'</div>' +
+									'<div class="comments_user_time">' +
+									time +
+									'</div>' +
+									'<div class="comments_user_text">' +
+									content +
+									'</div>' +
+									'<div data-name=' + user_name + ' class="comments_user_huifu">' +
+									'回复' +
+									'</div>' +
+									'<div class="comments_user_logo">' +
+									'<img src="' + user_img + '"/>' +
+									'</div>' +
+									'<div data-id=' + cid + ' data-wzan=' + zan + ' class="comments_user_zan">' +
+									'<div class="comments_user_zan_nb">' +
+									'<div id="zan_' + parseInt(cid) + '" class="comments_user_zan_float">' + zan + '</div>' +
+									'<div class="comments_user_zan_float comments_user_zan_icon"><img src="images/zan.png"></div>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								list.insertBefore(odiv, list.firstChild);
+							});
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；  
+							console.log(type);
+						}
+					});
+					//					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					//					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var cells = document.body.querySelectorAll('.comments_list');
+					var url = "http://www.zjliang.com/index.php/Gapi/Comment/videoindex.html";
+
+					mui.ajax(url, {
+						data: {
+							content_id: contentid, //获取文章id
+							first: cells.length,
+							last: cells.length + 10
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							var obo = eval(data);
+							var list = document.getElementById("hot");
+							mui.each(obo, function(index, item) {
+								var cid = item.id,
+									time = item.time,
+									content = item.content,
+									zan = item.zan,
+									user_img = item.user_img,
+									user_name = item.user_name;
+
+								//							console.log(cid);
+								//							console.log(cdaily_curl)
+								//						console.log(imgurl);
+								odiv = document.createElement('div');
+								odiv.className = 'comments_list';
+								odiv.innerHTML = '<div class="comments_list_p">' +
+									'<div class="comments_user_name">' +
+									user_name +
+									'</div>' +
+									'<div class="comments_user_time">' +
+									time +
+									'</div>' +
+									'<div class="comments_user_text">' +
+									content +
+									'</div>' +
+									'<div data-name=' + user_name + ' class="comments_user_huifu">' +
+									'回复' +
+									'</div>' +
+									'<div class="comments_user_logo">' +
+									'<img src="' + user_img + '"/>' +
+									'</div>' +
+									'<div data-id=' + cid + ' data-wzan=' + zan + ' class="comments_user_zan">' +
+									'<div class="comments_user_zan_nb">' +
+									'<div id="zan_' + parseInt(cid) + '" class="comments_user_zan_float">' + zan + '</div>' +
+									'<div class="comments_user_zan_float comments_user_zan_icon"><img src="images/zan.png"></div>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								//						console.log()
+								list.appendChild(odiv);
+							});
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				}, 1500);
+			}
+
+			//点击回复
+			mui('#hot').on('tap', '.comments_user_huifu', function() {
+				if(state.token) {
+					var tname = this.getAttribute("data-name");
+					var addcontent = document.getElementById('addcomment');
+					addcontent.value = state.account.name + ' 回复 ' + tname + '：';
+				} else {
+					plus.nativeUI.toast("请登录");
+				}
+
+			});
+
+			//添加评论
+			var state = app.getState();
+			document.getElementById('addbtn').addEventListener('tap', function() {
+				//获取登录信息
+				//				var state = app.getState();
+
+				if(state.token) {
+					var user_id = state.account.id; //用户id
+					var user_name = state.account.name; //用户名
+					var user_img2 = state.account.user_img2; //用户头像
+					var addcontent = document.getElementById('addcomment').value;
+					var ctitle = document.getElementById("hot");
+					var zan = 0;
+					var myDate = new Date();
+					var atime = myDate.toLocaleString();
+					if(addcontent.length <= 0) {
+						plus.nativeUI.toast("评论不得为空");
+					} else {
+						plus.nativeUI.toast("评论成功");
+						var addurl = "http://www.zjliang.com/index.php/Gapi/Comment/add_video_comment.html";
+						mui.ajax(addurl, {
+							data: {
+								content_id: contentid,
+								user_id: user_id,
+								time: atime,
+								content: addcontent,
+								zan: '0',
+								type: '2',
+								user_img: user_img2,
+								user_name: user_name
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								//					刷新列表
+								var curl = "http://www.zjliang.com/index.php/Gapi/Comment/newcomment";
+								mui.ajax(curl, {
+									data: {
+										mid: maxid,
+										type: '2',
+										content_id: contentid
+									},
+									dataType: 'json', //服务器返回json格式数据
+									type: 'post', //HTTP请求类型
+									timeout: 10000, //超时时间设置为10秒；
+									success: function(data) {
+										var inbo = eval(data);
+										mui.each(inbo, function(index, item) {
+											var cid = item.id,
+												time = item.time,
+												content = item.content,
+												zan = item.zan,
+												user_img = item.user_img,
+												user_name = item.user_name;
+											maxid = cid;
+											odiv = document.createElement('div');
+											odiv.className = 'comments_list';
+											odiv.innerHTML = '<div class="comments_list_p">' +
+												'<div class="comments_user_name">' +
+												user_name +
+												'</div>' +
+												'<div class="comments_user_time">' +
+												time +
+												'</div>' +
+												'<div class="comments_user_text">' +
+												content +
+												'</div>' +
+												'<div data-name=' + user_name + ' class="comments_user_huifu">' +
+												'回复' +
+												'</div>' +
+												'<div class="comments_user_logo">' +
+												'<img src="' + user_img + '"/>' +
+												'</div>' +
+												'<div data-id=' + cid + ' data-wzan=' + zan + ' class="comments_user_zan">' +
+												'<div class="comments_user_zan_nb">' +
+												'<div id="zan_' + parseInt(cid) + '" class="comments_user_zan_float">' + zan + '</div>' +
+												'<div class="comments_user_zan_float comments_user_zan_icon"><img src="images/zan.png"></div>' +
+												'</div>' +
+												'</div>' +
+												'</div>';
+											ctitle.insertBefore(odiv, ctitle.firstChild);
+											//									ctitle.appendChild(cobj);
+										});
+									},
+									error: function(xhr, type, errorThrown) {
+										//异常处理；
+										console.log(type);
+									}
+								});
+
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								console.log(type);
+								//						console.log('未添加');
+
+							}
+						});
+						document.getElementById('addcomment').value = '';
+					}
+
+				} else {
+					//					mui.openWindow({
+					//						url: 'login.html',
+					//						extras: {}
+					//					});
+					plus.nativeUI.toast("请登录");
+				}
+
+			});
+			//			评论点赞
+			mui('#hot').on('tap', '.comments_user_zan', function() {
+				var uid = this.getAttribute("data-id");
+				var wzan = this.getAttribute("data-wzan");
+				var inzan = 'zan_' + parseInt(uid);
+				var nzan = document.getElementById(inzan).innerHTML;
+				if(parseInt(nzan) == parseInt(wzan)) {
+					document.getElementById(inzan).innerHTML = parseInt(wzan) + 1;
+					var addurl = "http://www.zjliang.com/index.php/Gapi/Comment/Update.html";
+					mui.ajax(addurl, {
+						data: {
+							id: uid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+							//						console.log('未添加');
+						}
+					});
+				} else {
+					plus.nativeUI.toast("已点赞");
+				}
+
+			});
+			//文章点赞
+			document.getElementById('video_zan').addEventListener("tap", function() {
+				var arzan = document.getElementById('ocontent_zan2').innerHTML;
+				//				var iarzan = this.getAttribute("data-iarzan");
+				var iarzan = namble_czan;
+				if(parseInt(arzan) == parseInt(iarzan)) {
+					document.getElementById('ocontent_zan2').innerHTML = parseInt(arzan) + 1;
+					ocontent_zan.innerHTML = parseInt(arzan) + 1;
+					//					document.getElementById('video_zan').innerHTML = parseInt(arzan) + 1;
+					var addurl = "http://www.zjliang.com/index.php/Gapi/Video/zan.html";
+					mui.ajax(addurl, {
+						data: {
+							id: contentid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+							//						console.log('未添加');
+						}
+					});
+					plus.nativeUI.toast("感谢您的认可，我会更加精进，谢谢");
+				} else {
+					plus.nativeUI.toast("已点赞");
+				}
+
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		/**
+		 * 视频全屏播放旋转目前的逻辑
+		 * 视频全屏，即锁定屏幕为横屏。
+		 * 视频恢复，则解除屏幕方向的锁定。
+		 * 具体的切换，根据自己的实际业务做相应的操作。
+		 */
+		// Android平台的视频全屏旋转
+		var fullScreenOfAndroid = function() {
+			if(true) {
+				// 最新5+API的支持
+				var self = plus.webview.currentWebview();
+				self.setStyle({
+					videoFullscreen: 'landscape'
+				});
+			} else {
+				// 如果暂未更新sdk，可以先使用差量升级等方式，做出兼容处理；
+				// 旧版本下的兼容处理
+				document.addEventListener('webkitfullscreenchange', function() {
+					var el = document.webkitFullscreenElement; //获取全屏元素
+					if(el) {
+						plus.screen.lockOrientation('landscape'); //锁死屏幕方向为横屏
+					} else {
+						plus.screen.unlockOrientation(); //解除屏幕方向的锁定
+					}
+				});
+
+			}
+		};
+		// iOS平台的视频全屏旋转
+		var fullScreenOfIos = function(videoElem) {
+			// 监听的事件与Android平台有很大区别
+			videoElem.addEventListener('webkitbeginfullscreen', function() {
+				plus.screen.lockOrientation('landscape'); //锁死屏幕方向为横屏
+			});
+			videoElem.addEventListener('webkitendfullscreen', function() {
+				plus.screen.unlockOrientation(); //解除屏幕方向的锁定
+			});
+		};
+		// 涉及到5+API的内容，均在plusready事件后调用；
+		document.addEventListener('plusready', function() {
+			var osName = plus.os.name;
+			if(osName === 'Android') {
+				fullScreenOfAndroid();
+			} else if(osName === 'iOS') {
+				var videoElem = document.getElementById('ocontent_curl');
+				fullScreenOfIos(videoElem);
+			}
+		});
+	</script>
+
+</html>

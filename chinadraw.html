@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="recommended_box">
+					<div class="recommended_box_p">
+						<div id="hot" class="recommended_list_box">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});
+		mui('.inline_box').on('tap', 'a', function() {
+			var href = this.getAttribute('href');
+			mui.openWindow({
+				url: href,
+				id: href,
+				extras: {
+
+				}
+			});
+
+		});
+		mui('.recommended_box').on('tap', 'a', function() {
+			var href = this.getAttribute('href');
+			mui.openWindow({
+				url: href,
+				id: href,
+				extras: {
+
+				}
+			});
+
+		});
+		//			跟帖数据
+		var ifirst = 0; 
+		var ilast = 10;
+		var maxid = 0; 
+		var otype = '10';//类型
+		var url = "http://www.zjliang.com/index.php/Gapi/Article/tuijian.html/";
+		mui.ajax(url, {
+			data: {
+				tuijian: '1', //是否推荐 1：是
+				type: otype,
+				first: ifirst,
+				last: ilast
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				maxid = obo[0].id;
+				var list = document.getElementById("hot");
+				mui.each(obo, function(index, item) {
+					var cid = item.id,
+						carticle_inid = item.inid,
+						carticle_title = item.title,
+						carticle_time = item.time,
+						carticle_browse = item.browse,
+						carticle_comments = item.comments,
+						carticle_yimg = item.yimg,
+						carticle_user_name = item.user_name,
+						carticle_user_img = item.user_img,
+						carticle_zan = item.zan;
+					odiv = document.createElement('div');
+					odiv.className = 'recommended_list';
+					odiv.innerHTML =
+						'<div class="recommended_list_p">' +
+						'<a data-id=' + cid + ' href="content.html">' +
+						'<div class="recommended_preview">' +
+						'<img src=' + carticle_yimg + '>' +
+						'</div>' +
+						'<div class="recommended_text">' +
+						'<div class="recommended_text_p">' +
+						'<div class="recommended_title">' +
+						carticle_title +
+						'</div>' +
+						'<div class="recommended_time">' +
+						carticle_time +
+						'</div>' +
+						'<div class="recommended_detalie">' +
+						'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+						'</div>' +
+						'<div class="recommended_user_name">' +
+						carticle_user_name +
+						'<div class="recommended_user_img">' +
+						'<img src=' + carticle_user_img + ' />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</a>' +
+						'</div>';
+					list.appendChild(odiv);
+
+				});
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		function pulldownRefresh() {
+			setTimeout(function() {
+				//					代码位置
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/tuijiantwo.html/";
+
+				mui.ajax(url, {
+					data: {
+						tuijian: '1', //是否推荐 1：是
+						type: otype,
+						maxid: maxid,
+						//							first: cells.length
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						//							var macidl = obo.length;
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+							console.log(cid);
+							maxid = cid;
+							odiv = document.createElement('div');
+							odiv.className = 'recommended_list';
+							odiv.innerHTML =
+								'<div class="recommended_list_p">' +
+								'<a data-id=' + cid + ' href="content.html">' +
+								'<div class="recommended_preview">' +
+								'<img src=' + carticle_yimg + '>' +
+								'</div>' +
+								'<div class="recommended_text">' +
+								'<div class="recommended_text_p">' +
+								'<div class="recommended_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="recommended_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="recommended_detalie">' +
+								'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+								'</div>' +
+								'<div class="recommended_user_name">' +
+								carticle_user_name +
+								'<div class="recommended_user_img">' +
+								'<img src=' + carticle_user_img + ' />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>' +
+								'</div>';
+
+							list.insertBefore(odiv, list.firstChild);
+						});
+
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；  
+						console.log(type);
+					}
+				});
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1500);
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+				var cells = document.body.querySelectorAll('.recommended_list');
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/tuijian.html";
+
+				mui.ajax(url, {
+					data: {
+						tuijian: '1', //是否推荐 1：是
+						type: otype,
+						first: cells.length,
+						last: cells.length + 10
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+
+							odiv = document.createElement('div');
+							odiv.className = 'recommended_list';
+							odiv.innerHTML =
+								'<div class="recommended_list_p">' +
+								'<a data-id=' + cid + ' href="content.html">' +
+								'<div class="recommended_preview">' +
+								'<img src=' + carticle_yimg + '>' +
+								'</div>' +
+								'<div class="recommended_text">' +
+								'<div class="recommended_text_p">' +
+								'<div class="recommended_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="recommended_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="recommended_detalie">' +
+								'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+								'</div>' +
+								'<div class="recommended_user_name">' +
+								carticle_user_name +
+								'<div class="recommended_user_img">' +
+								'<img src=' + carticle_user_img + ' />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>' +
+								'</div>';
+							list.appendChild(odiv);
+						});
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}, 1500);
+		}
+		mui('#hot').on('tap', 'a', function() {
+			var contentid = this.getAttribute("data-id");
+			var id = this.getAttribute("href");
+			var href = this.getAttribute('href');
+			mui.openWindow({
+				url: href,
+				//					id: href,
+				extras: {
+					contentid: contentid //扩展参数 
+				}
+			});
+
+		});
+	</script>
+
+</html>

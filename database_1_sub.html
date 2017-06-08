@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+		<style>
+			body {
+				background-color: #ffffff;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--最新-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					最新
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_0">
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--楷书-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					楷书
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_1">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--草书-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					草书
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_2">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--行书-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					行书
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_3">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--篆书-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					篆书
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_4">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--隶书-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					隶书
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_5">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--魏碑-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					魏碑
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_6">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+		<!--其他-->
+		<div class="database_1_box">
+			<div class="database_1_title">
+				<div class="database_1_p">
+					其他
+				</div>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+			<div class="database_1_content">
+				<ul id="hot_7">
+
+				</ul>
+			</div>
+			<div class="database_line">
+				<img src="images/line.png" />
+			</div>
+		</div>
+
+	</body>
+	<script>
+		mui.init(); //	加载数据
+		//最新数据
+		var ifirst = 0;
+		var ilast = 6;
+		var url = "http://www.zjliang.com/index.php/Gapi/Database/news.html/";
+		mui.ajax(url, {
+			data: {
+				first: ifirst,
+				last: ilast
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				var list = document.getElementById('hot_0');
+				mui.each(obo, function(index, item) {
+					var cid = item.id,
+						ctitle = item.title,
+						cyimg = item.yimg + '?x-oss-process=image/resize,m_fill,h_300,w_300,limit_0';
+					odiv = document.createElement('li');
+					odiv.className = 'database_li';
+					odiv.innerHTML = '<a data-id= ' + cid + ' href="database_content.html">' +
+						'<div class="database_1_content_p">' +
+						'<div class="database_1_content_img">' +
+						'<img src=' + cyimg + ' />' +
+						'</div>' +
+						'<div class="database_1_content_text">' +
+						ctitle +
+						'</div>' +
+						'</div>' +
+						'</a>';
+					list.appendChild(odiv);
+				});
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		//		加载1-8数据列表
+		for(var i = 1; i < 8; i++) {
+			var ouhot = 'hot_' + i;
+			datalist(i, ouhot);
+		}
+
+		function datalist(otype, oid) {
+			var url = "http://www.zjliang.com/index.php/Gapi/Database/index.html/";
+			mui.ajax(url, {
+				data: {
+					type: otype,
+					first: ifirst,
+					last: ilast
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					var list = document.getElementById(oid);
+					mui.each(obo, function(index, item) {
+						var cid = item.id,
+							ctitle = item.title,
+							cyimg = item.yimg + '?x-oss-process=image/resize,m_fill,h_300,w_300,limit_0';
+						odiv = document.createElement('li');
+						odiv.className = 'database_li';
+						odiv.innerHTML = '<a data-id= ' + cid + ' href="database_content.html">' +
+							'<div class="database_1_content_p">' +
+							'<div class="database_1_content_img">' +
+							'<img src=' + cyimg + ' />' +
+							'</div>' +
+							'<div class="database_1_content_text">' +
+							ctitle +
+							'</div>' +
+							'</div>' +
+							'</a>';
+						list.appendChild(odiv);
+					});
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+		}
+		mui('.database_1_box').on('tap', 'a', function() {
+					var contentid = this.getAttribute("data-id");
+					var id = this.getAttribute("href");
+					var href = this.getAttribute('href');
+					mui.openWindow({
+						url: href,
+						extras: {
+							contentid: contentid //扩展参数 
+						}
+					}); 
+					}); 
+	</script>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/mui.zoom.js"></script>
+		<script type="text/javascript" src="js/mui.previewimage.js"></script>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="ccontent_title" class="mui-title"></h1>
+			<button id="collection_log" class="mui-btn mui-btn-outlined mui-pull-right" style="height:32px;padding-top:6px"></button>
+		</header>
+		<div class="mui-content  mui-slider-group">
+			<div class="">
+				<div class="big_box">
+					<div class="big_box_p">
+						<!--文章内容-->
+						<div class="article_box">
+							<div id="ccontent_content" class="article_img">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript">
+		mui.previewImage();
+	</script>
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			mui.init();
+			var self = plus.webview.currentWebview();
+			var contentid = self.contentid;
+			var state = app.getState();
+			var user_id = state.account.id; //作者id
+			var fzz; //1未收藏    2收藏
+			// 开启一直保持程序唤醒状态
+			plus.device.setWakelock(true);
+			var url = "http://www.zjliang.com/index.php/Gapi/Database/content.html";
+			mui.ajax(url, {
+				data: {
+					id: contentid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					var ccontent_title = obo[0].title,
+						ccontent_content = obo[0].content;
+
+					var ocontent_title = document.getElementById("ccontent_title");
+					var ocontent_content = document.getElementById("ccontent_content");
+
+					ocontent_title.innerHTML = ccontent_title;
+					ocontent_content.innerHTML = ccontent_content;
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+			//			判断是否收藏
+			var collection = document.getElementById('collection_log');
+			var url = "http://www.zjliang.com/index.php/Gapi/Collection/addpd.html/";
+			mui.ajax(url, {
+				data: {
+					user_id: user_id,
+					content_id: contentid
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					if(obo.length > 0) {
+						collection.innerText = '取消收藏';
+						fzz = 2;
+					} else {
+						collection.innerText = '收藏';
+						fzz = 1;
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+
+			collection.addEventListener("tap", function() {
+				colection(fzz)
+			})
+
+			function colection(ofzz) {
+				if(ofzz == 1) {
+					var url = "http://www.zjliang.com/index.php/Gapi/Collection/addcollection.html/";
+					mui.ajax(url, {
+						data: {
+							user_id: user_id,
+							content_id: contentid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							plus.nativeUI.toast('收藏成功');
+							collection.innerText = '取消收藏'
+							fzz=2;
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				} else if(ofzz == 2) {
+					var url = "http://www.zjliang.com/index.php/Gapi/Collection/delet.html/";
+					mui.ajax(url, {
+						data: {
+							user_id: user_id,
+							content_id: contentid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							plus.nativeUI.toast('取消收藏成功');
+							collection.innerText = '收藏'
+							fzz = 1;
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				}
+			}
+
+			mui.back = function() {
+				var ws = plus.webview.currentWebview();
+				plus.device.setWakelock(false);
+				plus.webview.close(ws);
+			}
+		});
+	</script>
+
+</html>

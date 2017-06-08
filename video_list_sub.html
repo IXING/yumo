@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="big_box">
+					<div class="big_box_p">
+						<div id="hot" class="video_list_box">
+							
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});
+
+		//			跟帖数据
+		var ifirst = 0;
+		var ilast = 10;
+		var maxid = 0;
+		var otype = '1'; //类型
+		var url = "http://www.zjliang.com/index.php/Gapi/Video/index.html/";
+		mui.ajax(url, {
+			data: {
+				type: otype,
+				first: ifirst,
+				last: ilast
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				maxid = obo[0].id;
+				var list = document.getElementById("hot");
+				mui.each(obo, function(index, item) {
+					var cid = item.id,
+						cvideo_yimg = item.yimg,
+						cvideo_title = item.title,
+						cvideo_browse = item.browse,
+						cvideo_comments = item.comments,
+						cvideo_zan = item.zan;
+					odiv = document.createElement('div');
+					odiv.className = 'video_list';
+					odiv.innerHTML = '<a data-id=' + cid + ' data-browse=' + cvideo_browse + ' data-comments=' + cvideo_comments + ' data-zan=' + cvideo_zan + ' href="video_content.html">' +
+						'<div class="video_img">' +
+						'<img src=" ' + cvideo_yimg + ' " />' +
+						'</div>' +
+						'<div class="video_text">' +
+						'<div class="video_name">' +
+						cvideo_title +
+						'</div>' +
+						'<div class="video_detaile">' +
+						'浏览/&nbsp;<span>' + cvideo_browse + '</span>&nbsp;&nbsp;评论/&nbsp;<span>' + cvideo_comments + '</span>&nbsp;&nbsp;赞/&nbsp;<span>' + cvideo_zan + '</span>' +
+						'</div>' +
+						'</div>' +
+						'</a>';
+					list.appendChild(odiv);
+
+				});
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		function pulldownRefresh() {
+			setTimeout(function() {
+				//					代码位置
+				var url = "http://www.zjliang.com/index.php/Gapi/Video/updata.html/";
+
+				mui.ajax(url, {
+					data: {
+						type: otype,
+						maxid: maxid,
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						//							var macidl = obo.length;
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								cvideo_yimg = item.yimg,
+								cvideo_title = item.title,
+								cvideo_browse = item.browse,
+								cvideo_comments = item.comments,
+								cvideo_zan = item.zan;
+							console.log(cid);
+							maxid = cid;
+							odiv = document.createElement('div');
+							odiv.className = 'video_list';
+							odiv.innerHTML = '<a data-id=' + cid + ' href="video_content.html">' +
+								'<div class="video_img">' +
+								'<img src=" ' + cvideo_yimg + ' " />' +
+								'</div>' +
+								'<div class="video_text">' +
+								'<div class="video_name">' +
+								cvideo_title +
+								'</div>' +
+								'<div class="video_detaile">' +
+								'浏览/&nbsp;<span>' + cvideo_browse + '</span>&nbsp;&nbsp;评论/&nbsp;<span>' + cvideo_comments + '</span>&nbsp;&nbsp;赞/&nbsp;<span>' + cvideo_zan + '</span>' +
+								'</div>' +
+								'</div>' +
+								'</a>';
+
+							list.insertBefore(odiv, list.firstChild);
+						});
+
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；  
+						console.log(type);
+					}
+				});
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1500);
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+				var cells = document.body.querySelectorAll('.video_list');
+				var url = "http://www.zjliang.com/index.php/Gapi/Video/index.html/";
+
+				mui.ajax(url, {
+					data: {
+						type: otype,
+						first: cells.length,
+						last: cells.length + 10
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								cvideo_yimg = item.yimg,
+								cvideo_title = item.title,
+								cvideo_browse = item.browse,
+								cvideo_comments = item.comments,
+								cvideo_zan = item.zan;
+
+							odiv = document.createElement('div');
+							odiv.className = 'video_list';
+							odiv.innerHTML = '<a data-id=' + cid + ' href="video_content.html">' +
+								'<div class="video_img">' +
+								'<img src=" ' + cvideo_yimg + ' " />' +
+								'</div>' +
+								'<div class="video_text">' +
+								'<div class="video_name">' +
+								cvideo_title +
+								'</div>' +
+								'<div class="video_detaile">' +
+								'浏览/&nbsp;<span>' + cvideo_browse + '</span>&nbsp;&nbsp;评论/&nbsp;<span>' + cvideo_comments + '</span>&nbsp;&nbsp;赞/&nbsp;<span>' + cvideo_zan + '</span>' +
+								'</div>' +
+								'</div>' +
+								'</a>';
+							list.appendChild(odiv);
+						});
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}, 1500);
+		}
+		mui('#hot').on('tap', 'a', function() {
+			var contentid = this.getAttribute("data-id");
+			
+			var cbrowse = this.getAttribute("data-browse");
+			var ccomments = this.getAttribute("data-comments");
+			var czan = this.getAttribute("data-zan");
+			
+			var id = this.getAttribute("href");
+			var href = this.getAttribute('href');
+			mui.openWindow({
+				url: href,
+				extras: {
+					contentid: contentid, //扩展参数 
+					cbrowse: cbrowse,
+					ccomments: ccomments,
+					czan: czan
+				}
+			});
+
+		});
+	</script>
+
+</html>

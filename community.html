@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="big_box">
+					<div class="big_box_p">
+						<div id="hot" class="community_box">
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});
+
+		//			跟帖数据
+		var ifirst = 0;
+		var ilast = 10;
+		var maxid = 0;
+
+		var url = "http://www.zjliang.com/index.php/Gapi/Article/index.html/";
+		mui.ajax(url, {
+			data: {
+				first: ifirst,
+				last: ilast
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				maxid = obo[0].id;
+				var list = document.getElementById("hot");
+				mui.each(obo, function(index, item) {
+					var cid = item.id,
+						carticle_inid = item.inid,
+						carticle_title = item.title,
+						carticle_subtitle = item.subtitle,
+						carticle_time = item.time,
+						carticle_browse = item.browse,
+						carticle_comments = item.comments,
+						carticle_yimg = item.yimg,
+						carticle_yimg2 = item.yimg2,
+						carticle_yimg3 = item.yimg3,
+						carticle_yimg4 = item.yimg4,
+						carticle_user_name = item.user_name,
+						carticle_user_img = item.user_img,
+						carticle_zan = item.zan;
+					//					console.log(carticle_yimg2);
+					odiv = document.createElement('div');
+					odiv.className = 'community_list';
+					if(carticle_yimg == null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+						carticle_yimg = '';
+						carticle_yimg2 = '';
+						carticle_yimg3 = '';
+						carticle_yimg4 = '';
+					} else if(carticle_yimg != null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+						carticle_yimg2 = '';
+						carticle_yimg3 = '';
+						carticle_yimg4 = '';
+					} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 == null && carticle_yimg4 == null) {
+						carticle_yimg3 = '';
+						carticle_yimg4 = '';
+					} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 != null && carticle_yimg4 == null) {
+						carticle_yimg4 = '';
+					};
+					odiv.innerHTML = '<a data-id=' + cid + ' href="content.html">' +
+						'<div class="community_title">' +
+						carticle_title +
+						'</div>' +
+						'<div class="community_subtitle">' +
+						carticle_subtitle +
+						'</div>' +
+						'<div class="community_img_box">' +
+						'<div class="community_img">' +
+						'<div class="community_img_p">' +
+						'<div class="community_img_pp">' +
+						'<img src=" ' + carticle_yimg + ' " />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<div class="community_img">' +
+						'<div class="community_img_p">' +
+						'<div class="community_img_pp">' +
+						'<img src=" ' + carticle_yimg2 + ' " />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<div class="community_img">' +
+						'<div class="community_img_p">' +
+						'<div class="community_img_pp">' +
+						'<img src=" ' + carticle_yimg3 + ' " />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<div class="community_img">' +
+						'<div class="community_img_p">' +
+						'<div class="community_img_pp">' +
+						'<img src=" ' + carticle_yimg4 + ' " />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<div class="community_user_box">' +
+						'<div class="community_user_p">' +
+						'<div class="community_user_name">' +
+						carticle_user_name +
+						'</div>' +
+						'<div class="community_user_time">' +
+						carticle_time +
+						'</div>' +
+						'<div class="community_user_logo">' +
+						'<img src=" ' + carticle_user_img + ' " />' +
+						'</div>' +
+						'<div class="community_user_zan">' +
+						'<div class="community_user_zan_nb">' +
+						'<div class="community_user_zan_float">' + carticle_zan + '</div>' +
+						'<div class="community_user_zan_float community_user_zan_icon"><img src="images/zan2.png"></div>' +
+						'<div class="community_user_zan_float community_user_zan_huifu">' + carticle_comments + ' </div>' +
+						'<div class="community_user_zan_float community_user_zan_icon2"><img src="images/huifu2.png"></div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</a>';
+					//						console.log()
+					list.appendChild(odiv);
+
+				});
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		function pulldownRefresh() {
+			setTimeout(function() {
+				//					代码位置
+				//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/updata.html/";
+
+				mui.ajax(url, {
+					data: {
+						maxid: maxid,
+						//							first: cells.length
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						//							var macidl = obo.length;
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_subtitle = item.subtitle,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_yimg2 = item.yimg2,
+								carticle_yimg3 = item.yimg3,
+								carticle_yimg4 = item.yimg4,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+							maxid = cid;
+							if(carticle_yimg == null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg = '';
+								carticle_yimg2 = '';
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg2 = '';
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 != null && carticle_yimg4 == null) {
+								carticle_yimg4 = '';
+							};
+							odiv = document.createElement('div');
+							odiv.className = 'community_list';
+							odiv.innerHTML = '<a data-id=' + cid + ' href="content.html">' +
+								'<div class="community_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="community_subtitle">' +
+								carticle_subtitle +
+								'</div>' +
+								'<div class="community_img_box">' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg2 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg3 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg4 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_user_box">' +
+								'<div class="community_user_p">' +
+								'<div class="community_user_name">' +
+								carticle_user_name +
+								'</div>' +
+								'<div class="community_user_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="community_user_logo">' +
+								'<img src=" ' + carticle_user_img + ' " />' +
+								'</div>' +
+								'<div class="community_user_zan">' +
+								'<div class="community_user_zan_nb">' +
+								'<div class="community_user_zan_float">' + carticle_zan + '</div>' +
+								'<div class="community_user_zan_float community_user_zan_icon"><img src="images/zan2.png"></div>' +
+								'<div class="community_user_zan_float community_user_zan_huifu">' + carticle_comments + ' </div>' +
+								'<div class="community_user_zan_float community_user_zan_icon2"><img src="images/huifu2.png"></div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>';
+
+							list.insertBefore(odiv, list.firstChild);
+						});
+
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；  
+						console.log(type);
+					}
+				});
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1500);
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+				var cells = document.body.querySelectorAll('.community_list');
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/index.html";
+
+				mui.ajax(url, {
+					data: {
+						first: cells.length,
+						last: cells.length + 10
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_subtitle = item.subtitle,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_yimg2 = item.yimg2,
+								carticle_yimg3 = item.yimg3,
+								carticle_yimg4 = item.yimg4,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+
+							//							console.log(cid);
+							//							console.log(cdaily_curl)
+							//						console.log(imgurl);
+							if(carticle_yimg == null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg = '';
+								carticle_yimg2 = '';
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 == null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg2 = '';
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 == null && carticle_yimg4 == null) {
+								carticle_yimg3 = '';
+								carticle_yimg4 = '';
+							} else if(carticle_yimg != null && carticle_yimg2 != null && carticle_yimg3 != null && carticle_yimg4 == null) {
+								carticle_yimg4 = '';
+							};
+							odiv = document.createElement('div');
+							odiv.className = 'community_list';
+							odiv.innerHTML = '<a data-id=' + cid + ' href="content.html">' +
+								'<div class="community_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="community_subtitle">' +
+								carticle_subtitle +
+								'</div>' +
+								'<div class="community_img_box">' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg2 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg3 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_img">' +
+								'<div class="community_img_p">' +
+								'<img src=" ' + carticle_yimg4 + ' " />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'<div class="community_user_box">' +
+								'<div class="community_user_p">' +
+								'<div class="community_user_name">' +
+								carticle_user_name +
+								'</div>' +
+								'<div class="community_user_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="community_user_logo">' +
+								'<img src=" ' + carticle_user_img + ' " />' +
+								'</div>' +
+								'<div class="community_user_zan">' +
+								'<div class="community_user_zan_nb">' +
+								'<div class="community_user_zan_float">' + carticle_zan + '</div>' +
+								'<div class="community_user_zan_float community_user_zan_icon"><img src="images/zan2.png"></div>' +
+								'<div class="community_user_zan_float community_user_zan_huifu">' + carticle_comments + ' </div>' +
+								'<div class="community_user_zan_float community_user_zan_icon2"><img src="images/huifu2.png"></div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>';
+							//						console.log()
+							list.appendChild(odiv);
+						});
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}, 1500);
+		}
+		mui('#hot').on('tap', 'a', function() {
+			var contentid = this.getAttribute("data-id");
+			//				var contentid = this.getAttribute('data-id'); 
+			var id = this.getAttribute("href");
+			var href = this.getAttribute('href');
+			//				console.log(contentid);
+			mui.openWindow({
+				url: href,
+				//					id: href,
+				extras: {
+					contentid: contentid //扩展参数 
+				}
+			});
+
+		});
+	</script>
+
+</html>

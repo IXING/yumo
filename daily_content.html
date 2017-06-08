@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详情</h1>
+			<button id="release" class="mui-btn mui-btn-outlined mui-pull-right" style="height:32px;padding-top:6px">发布作品</button>
+
+		</header>
+
+	</body>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script type="text/javascript">
+		//启用双击监听
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var contentid = self.contentid;
+			mui.init({
+				gestureConfig: {
+					doubletap: true
+				},
+				subpages: [{
+					url: 'daily_content_sub.html',
+					id: 'daily_content_sub.html',
+					styles: {
+						top: '50px',
+						bottom: '0'
+					},
+					extras: {
+						contentid: contentid
+					}
+				}]
+			});
+			var contentWebview = null;
+			document.querySelector('header').addEventListener('doubletap', function() {
+				if(contentWebview == null) {
+					contentWebview = plus.webview.currentWebview().children()[0];
+				}
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			});
+			var state = app.getState(); //获取登录信息
+			document.getElementById('release').addEventListener("tap", function() {
+				if(state.token) {
+					mui.openWindow({
+						url: 'release.html',
+						extras: {
+							odailyid: contentid,
+							type:'1',
+							webvie:'daily_content_sub.html'
+						}
+					})
+				} else {
+					plus.nativeUI.toast("请登录");
+				}
+
+			})
+
+		});
+	</script>
+
+</html>

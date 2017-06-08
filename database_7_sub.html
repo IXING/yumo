@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+		<style>
+			body {
+				background-color: #ffffff;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class=" mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<div class="database_1_box">
+					<div class="database_1_content">
+						<ul id="hot">
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+
+			//	加载数据
+			var type = '6'; //资料类型
+			//			类型：
+//			1： 楷书；
+//			2： 草书；
+//			3： 行书；
+//			4： 篆书；
+//			5： 隶书；
+//			6： 魏碑；
+//			7： 其他
+			var ifirst = 0;
+			var ilast = 18;
+			var maxid = 0;
+			var url = "http://www.zjliang.com/index.php/Gapi/Database/index.html/";
+			mui.ajax(url, {
+				data: {
+					type: type,
+					first: ifirst,
+					last: ilast
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var obo = eval(data);
+					maxid = obo[0].id;
+					var list = document.getElementById("hot");
+					mui.each(obo, function(index, item) {
+						var cid = item.id,
+							ctitle = item.title,
+							cyimg = item.yimg + '?x-oss-process=image/resize,m_fill,h_300,w_300,limit_0';
+						odiv = document.createElement('li');
+						odiv.className = 'database_li';
+						odiv.innerHTML = '<a data-id= ' + cid + ' href="database_content.html">' +
+							'<div class="database_1_content_p">' +
+							'<div class="database_1_content_img">' +
+							'<img src=' + cyimg + ' />' +
+							'</div>' +
+							'<div class="database_1_content_text">' +
+							ctitle +
+							'</div>' +
+							'</div>' +
+							'</a>';
+						list.appendChild(odiv);
+					});
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+
+			function pulldownRefresh() {
+				setTimeout(function() {
+					//					代码位置
+					var url = "http://www.zjliang.com/index.php/Gapi/Database/two.html/";
+
+					mui.ajax(url, {
+						data: {
+							type: type,
+							maxid: maxid,
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							var obo = eval(data);
+							var list = document.getElementById("hot");
+							//							var macidl = obo.length;
+							mui.each(obo, function(index, item) {
+								var cid = item.id,
+									ctitle = item.title,
+									cyimg = item.yimg + '?x-oss-process=image/resize,m_fill,h_300,w_300,limit_0';
+								console.log(cid);
+								maxid = cid;
+								odiv = document.createElement('li');
+								odiv.className = 'database_li';
+								odiv.innerHTML = '<a data-id= ' + cid + 'href="database_content.html">' +
+									'<div class="database_1_content_p">' +
+									'<div class="database_1_content_img">' +
+									'<img src=' + cyimg + ' />' +
+									'</div>' +
+									'<div class="database_1_content_text">' +
+									ctitle +
+									'</div>' +
+									'</div>' +
+									'</a>';
+
+								list.insertBefore(odiv, list.firstChild);
+							});
+
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；  
+							console.log(type);
+						}
+					});
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var cells = document.body.querySelectorAll('.database_li');
+					var url = "http://www.zjliang.com/index.php/Gapi/Database/index.html";
+
+					mui.ajax(url, {
+						data: {
+							type: type,
+							first: cells.length,
+							last: cells.length + 10
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							var obo = eval(data);
+							var list = document.getElementById("hot");
+							mui.each(obo, function(index, item) {
+								var cid = item.id,
+									ctitle = item.title,
+									cyimg = item.yimg + '?x-oss-process=image/resize,m_fill,h_300,w_300,limit_0';
+
+								odiv = document.createElement('li');
+								odiv.className = 'database_li';
+								odiv.innerHTML = '<a data-id= ' + cid + 'href="database_content.html">' +
+									'<div class="database_1_content_p">' +
+									'<div class="database_1_content_img">' +
+									'<img src=' + cyimg + ' />' +
+									'</div>' +
+									'<div class="database_1_content_text">' +
+									ctitle +
+									'</div>' +
+									'</div>' +
+									'</a>';
+								list.appendChild(odiv);
+							});
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				}, 1500);
+			}
+			mui('#hot').on('tap', 'a', function() {
+				var contentid = this.getAttribute("data-id");
+				var id = this.getAttribute("href");
+				var href = this.getAttribute('href');
+//				console.log(href);
+				mui.openWindow({
+					url: href,
+					//					id: href,
+					extras: {
+						contentid: contentid //扩展参数 
+					}
+				});
+
+			});
+		</script>
+
+	</body>
+
+</html>

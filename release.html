@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发布作品</h1>
+		</header>
+
+	</body>
+	<script>
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var odailyid = self.odailyid;
+			var type = self.type;
+			var webvie = self.webvie;
+		mui.init({
+			subpages: [{
+				url: 'release_sub.html',
+				id: 'release_sub.html',
+				styles: {
+					top: '45px', //mui标题栏默认高度为45px；
+					bottom: '0px' //默认为0px，可不定义；
+				},
+				extras: {
+					odailyid : odailyid,
+					type : type ,
+					webvie : webvie
+				} //额外扩展参数
+			}]
+		});
+		})
+	</script>
+
+</html>

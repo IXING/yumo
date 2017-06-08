@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+		<!--<link href="css/style.css" rel="stylesheet" />-->
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我</h1>
+			<a id="seting" class="mui-icon mui-icon mui-icon-gear mui-pull-right "></a>
+		</header>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="me_box">
+					<div class="me_logo">
+						<img id="user_img" src="" />
+					</div>
+					<!--<div id="seting" class="seting">
+						<img src="images/seting.png" />
+					</div>-->
+					<div id="name" class="me_name">
+
+					</div>
+					<div id="title" class="me_title">
+
+					</div>
+					<div class="me_introduction">
+						<div class="me_left">
+							人气<span id="browse"></span>
+						</div>
+						<div class="me_left">
+							作品<span id="article"></span>
+						</div>
+						<div id="collection_btn" class="me_left">
+							收藏<span id="focus"></span>
+						</div>
+
+					</div>
+				</div>
+				<!--每日精选-->
+				<div class="big_box">
+					<div class="big_box_p">
+						<div class="jx_title_p">
+							<div class="jx_title">
+								<img src="images/jx_title2.jpg" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="recommended_box">
+					<div class="recommended_box_p">
+						<div id="hot" class="recommended_list_box">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script src="js/mui.enterfocus.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});
+		//获取登录信息
+		var state = app.getState();
+
+		//		console.log(user_id);
+		mui.plusReady(function() {
+			//获取登录状态
+			if(state.token) {
+				var openid = state.account.openid;
+				var rukou = state.account.rukou;
+				var name = state.account.name;
+				var userimg = state.account.userimg;
+				//												console.log(JSON.stringify(state)) 
+
+				//				我的作品列表
+				//			跟帖数据
+
+			} else {
+				mui.openWindow({
+					url: 'login.html',
+					extras: {}
+				});
+			}
+
+		})
+		var user_id = state.account.id;
+		//		console.log(user_id);
+		//		用户信息
+		var url = "http://www.zjliang.com/index.php/Gapi/Login/user";
+		mui.ajax(url, {
+			data: {
+				id: user_id
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				var cuser_img = obo[0].user_img,
+					cname = obo[0].name,
+					ctitle = obo[0].title,
+					cbrowse = obo[0].browse,
+					carticle = obo[0].article,
+					cfocus = obo[0].focus;
+
+				var ouser_img = document.getElementById("user_img");
+				var oname = document.getElementById("name");
+				var otitle = document.getElementById("title");
+				var obrowse = document.getElementById("browse");
+				var oarticle = document.getElementById("article");
+				var ofocus = document.getElementById("focus");
+
+				ouser_img.src = cuser_img;
+				oname.innerHTML = cname;
+				otitle.innerHTML = ctitle;
+				obrowse.innerHTML = cbrowse;
+				oarticle.innerHTML = carticle;
+				ofocus.innerHTML = cfocus;
+
+				//				console.log(cuser_img);
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		var ifirst = 0;
+		var ilast = 10;
+		var maxid = 0;
+		var oinid = user_id; //用户id
+		var url = "http://www.zjliang.com/index.php/Gapi/Article/me.html/";
+		mui.ajax(url, {
+			data: {
+				inid: oinid,
+				first: ifirst,
+				last: ilast
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			success: function(data) {
+				var obo = eval(data);
+				maxid = obo[0].id;
+				var list = document.getElementById("hot");
+				mui.each(obo, function(index, item) {
+					var cid = item.id,
+						carticle_inid = item.inid,
+						carticle_title = item.title,
+						carticle_time = item.time,
+						carticle_browse = item.browse,
+						carticle_comments = item.comments,
+						carticle_yimg = item.yimg,
+						carticle_user_name = item.user_name,
+						carticle_user_img = item.user_img,
+						carticle_zan = item.zan;
+					//						console.log(carticle_yimg);
+					odiv = document.createElement('div');
+					odiv.className = 'recommended_list';
+					odiv.innerHTML =
+						'<div class="recommended_list_p">' +
+						'<div data-cid=' + cid + ' class="medelet"><img src="images/delet.png"></div>' +
+						'<a data-id=' + cid + ' href="content.html">' +
+						'<div class="recommended_preview">' +
+						'<img src=' + carticle_yimg + '>' +
+						'</div>' +
+						'<div class="recommended_text">' +
+						'<div class="recommended_text_p">' +
+						'<div class="recommended_title">' +
+						carticle_title +
+						'</div>' +
+						'<div class="recommended_time">' +
+						carticle_time +
+						'</div>' +
+						'<div class="recommended_detalie">' +
+						'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+						'</div>' +
+						'<div class="recommended_user_name">' +
+						carticle_user_name +
+						'<div class="recommended_user_img">' +
+						'<img src=' + carticle_user_img + ' />' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</a>' +
+						'</div>';
+					//						console.log()
+					list.appendChild(odiv);
+
+				});
+
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+			}
+		});
+
+		function pulldownRefresh() {
+			setTimeout(function() {
+				//					代码位置
+				//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/metwo.html/";
+
+				mui.ajax(url, {
+					data: {
+						inid: oinid,
+						maxid: maxid,
+						//							first: cells.length
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						//							var macidl = obo.length;
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+							console.log(cid);
+							maxid = cid;
+							odiv = document.createElement('div');
+							odiv.className = 'recommended_list';
+							odiv.innerHTML =
+								'<div class="recommended_list_p">' +
+								'<div data-cid=' + cid + ' class="medelet"><img src="images/delet.png"></div>' +
+								'<a data-id=' + cid + ' href="content.html">' +
+								'<div class="recommended_preview">' +
+								'<img src=' + carticle_yimg + '>' +
+								'</div>' +
+								'<div class="recommended_text">' +
+								'<div class="recommended_text_p">' +
+								'<div class="recommended_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="recommended_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="recommended_detalie">' +
+								'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+								'</div>' +
+								'<div class="recommended_user_name">' +
+								carticle_user_name +
+								'<div class="recommended_user_img">' +
+								'<img src=' + carticle_user_img + ' />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>' +
+								'</div>';
+
+							list.insertBefore(odiv, list.firstChild);
+						});
+
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；  
+						console.log(type);
+					}
+				});
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1500);
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+				var cells = document.body.querySelectorAll('.recommended_list');
+				var url = "http://www.zjliang.com/index.php/Gapi/Article/me.html";
+
+				mui.ajax(url, {
+					data: {
+						inid: oinid,
+						first: cells.length,
+						last: cells.length + 10
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var obo = eval(data);
+						var list = document.getElementById("hot");
+						mui.each(obo, function(index, item) {
+							var cid = item.id,
+								carticle_inid = item.inid,
+								carticle_title = item.title,
+								carticle_time = item.time,
+								carticle_browse = item.browse,
+								carticle_comments = item.comments,
+								carticle_yimg = item.yimg,
+								carticle_user_name = item.user_name,
+								carticle_user_img = item.user_img,
+								carticle_zan = item.zan;
+
+							//							console.log(cid);
+							//							console.log(cdaily_curl)
+							//						console.log(imgurl);
+							odiv = document.createElement('div');
+							odiv.className = 'recommended_list';
+							odiv.innerHTML =
+								'<div class="recommended_list_p">' +
+								'<div data-cid=' + cid + ' class="medelet"><img src="images/delet.png"></div>' +
+								'<a data-id=' + cid + ' href="content.html">' +
+								'<div class="recommended_preview">' +
+								'<img src=' + carticle_yimg + '>' +
+								'</div>' +
+								'<div class="recommended_text">' +
+								'<div class="recommended_text_p">' +
+								'<div class="recommended_title">' +
+								carticle_title +
+								'</div>' +
+								'<div class="recommended_time">' +
+								carticle_time +
+								'</div>' +
+								'<div class="recommended_detalie">' +
+								'浏览/<span>' + carticle_browse + '</span>&nbsp;&nbsp;评论/<span>' + carticle_comments + '</span>&nbsp;&nbsp;赞/<span>' + carticle_zan + '</span>' +
+								'</div>' +
+								'<div class="recommended_user_name">' +
+								carticle_user_name +
+								'<div class="recommended_user_img">' +
+								'<img src=' + carticle_user_img + ' />' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</a>' +
+								'</div>';
+							//						console.log()
+							list.appendChild(odiv);
+						});
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}, 1500);
+		}
+		mui('#hot').on('tap', 'a', function() {
+			var contentid = this.getAttribute("data-id");
+			//				var contentid = this.getAttribute('data-id'); 
+			var id = this.getAttribute("href");
+			var href = this.getAttribute('href');
+			//				console.log(contentid);
+			mui.openWindow({
+				url: href,
+				//					id: href,
+				extras: {
+					contentid: contentid //扩展参数 
+				}
+			});
+
+		});
+		//		删除作品
+		mui('#hot').on('tap', '.medelet', function() {
+			var contentid = this.getAttribute("data-cid");
+			var index = $(".recommended_list_box .medelet").index($(this));
+			//			plus.nativeUI.confirm(message, confirmCB, title, buttons);
+			plus.nativeUI.confirm("确定删除这篇文章吗？", function(e) {
+				//				console.log((e.index == 0) ? "Yes!" : "No!");
+				if(e.index == 0) {
+					$('.recommended_list_box .recommended_list').eq(index).remove();
+					var url = "http://www.zjliang.com/index.php/Gapi/Article/medelet.html";
+					mui.ajax(url, {
+						data: {
+							id: contentid,
+							user_id: state.account.id
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							plus.nativeUI.toast('已删除')
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				} else if(e.index == 1) {
+					plus.nativeUI.toast('已取消')
+				}
+			}, "删除文章", ["是", "否"]);
+
+		});
+		document.getElementById('seting').addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'setting.html'
+			})
+		})
+		document.getElementById('collection_btn').addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'collection.html'
+			})
+		})
+	</script>
+
+</html>

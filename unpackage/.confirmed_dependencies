@@ -1,0 +1,992 @@
+{
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/header.jpg",
+			"css/app.css",
+			"images/daily_title.jpg",
+			"images/daily_banner.jpg",
+			"images/iline_shufa.jpg",
+			"images/iline_more.jpg",
+			"images/iline_bizhi.jpg",
+			"images/jx_title.jpg",
+			"images/iline_vodio.jpg",
+			"images/recommended_preview.jpg",
+			"images/user_img.jpg",
+			"images/recommended_preview_6.jpg",
+			"images/recommended_preview_2.jpg",
+			"images/recommended_preview_5.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/recommended_preview_3.jpg",
+			"images/recommended_preview_1.jpg",
+			"images/b_btn_d_1.jpg",
+			"images/b_btn_s_3.jpg",
+			"daily.html",
+			"fonts/mui.ttf",
+			"images/b_btn_d_4.jpg",
+			"images/b_btn_d_5.jpg",
+			"images/b_btn_d_2.jpg",
+			"images/b_btn_s_1.jpg",
+			"images/b_btn_d_3.jpg",
+			"images/b_btn_s_2.jpg",
+			"images/b_btn_s_4.jpg",
+			"images/b_btn_s_5.jpg",
+			"calligraphy.html",
+			"js/app.js",
+			"community.html",
+			"chinadraw.html"
+		],
+		"refer": [
+			"daily.html",
+			"calligraphy.html",
+			"community.html",
+			"me.html",
+			"calligraphy_sub.html",
+			"chinadraw.html",
+			"login.html",
+			"unlock.html",
+			"index2.html"
+		]
+	},
+	"daily.html": {
+		"resources": [
+			"images/iline_more.jpg",
+			"images/daily_banner.jpg",
+			"images/daily_title.jpg",
+			"images/recommended_preview_6.jpg",
+			"images/iline_shufa.jpg",
+			"images/recommended_preview_2.jpg",
+			"images/iline_bizhi.jpg",
+			"images/recommended_preview_5.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/recommended_preview_3.jpg",
+			"images/user_img.jpg",
+			"images/jx_title.jpg",
+			"images/recommended_preview_1.jpg",
+			"images/iline_vodio.jpg",
+			"js/mui.min.js",
+			"css/app.css",
+			"css/mui.min.css",
+			"daily_content.html",
+			"daily_sub.html",
+			"images/bizhi_5.png",
+			"images/bizhi_3.png",
+			"images/bizhi_6.png",
+			"images/bizhi_2.png",
+			"images/bizhi_1.png",
+			"images/bizhi_4.png",
+			"bizhi.html",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"daily_content.html",
+			"calligraphy_list.html",
+			"content.html",
+			"video_list.html",
+			"bizhi.html",
+			"daily_sub.html",
+			"database.html"
+		]
+	},
+	"daily_content.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"images/daily_banner.jpg",
+			"images/daily_title.jpg",
+			"images/recommended_preview_2.jpg",
+			"images/user_img.jpg",
+			"images/recommended_preview_1.jpg",
+			"images/recommended_preview_6.jpg",
+			"js/mui.min.js",
+			"css/app.css",
+			"css/mui.min.css",
+			"images/recommended_preview_5.jpg",
+			"images/recommended_preview_3.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/jx_title.jpg",
+			"images/daily_list.jpg",
+			"daily_list.html",
+			"daily_detaile.html",
+			"daily_content_sub.html",
+			"js/app.js"
+		],
+		"refer": [
+			"daily_list.html",
+			"daily_detaile.html",
+			"daily_content_sub.html",
+			"release.html"
+		]
+	},
+	"daily_list.html": {
+		"resources": [
+			"daily_content.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"daily_listsub.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"daily_content.html",
+			"daily_listsub.html"
+		]
+	},
+	"daily_detaile.html": {
+		"resources": [
+			"images/daily_list.jpg",
+			"images/daily_banner.jpg",
+			"images/daily_title.jpg",
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"daily_content.html",
+			"images/daily_banner2.jpg",
+			"images/close.png",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js"
+		],
+		"refer": [
+			"daily_content.html"
+		]
+	},
+	"calligraphy_list.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"calligraphy_list_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_list_sub.html"
+		]
+	},
+	"content.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/user_img.jpg",
+			"images/user_img2.png",
+			"images/line.png",
+			"images/article_content.png",
+			"images/zan_icon.png",
+			"images/zan_bg.png",
+			"images/daily_title.jpg",
+			"images/comments_title.png",
+			"images/zan.png",
+			"images/huifu.png",
+			"community.html",
+			"content_sub.html",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"js/mui.pullToRefresh.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/app.js"
+		],
+		"refer": [
+			"community.html",
+			"content_sub.html"
+		]
+	},
+	"video_list.html": {
+		"resources": [
+			"images/daily_banner.jpg",
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"video_content.html",
+			"images/video_list.png",
+			"video_list_sub.html"
+		],
+		"refer": [
+			"video_content.html",
+			"video_list_sub.html"
+		]
+	},
+	"video_content.html": {
+		"resources": [
+			"video_list.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/video_list.png",
+			"images/user_img2.png",
+			"images/zan_icon.png",
+			"images/zan_bg.png",
+			"images/zan.png",
+			"images/comments_title.png",
+			"video_content_sub.html"
+		],
+		"refer": [
+			"video_list.html",
+			"video_content_sub.html"
+		]
+	},
+	"calligraphy.html": {
+		"resources": [
+			"images/calligraphy_icon_5.png",
+			"images/calligraphy_icon_4.png",
+			"images/calligraphy_icon_6.png",
+			"images/calligraphy_icon_8.png",
+			"images/calligraphy_icon_7.png",
+			"images/calligraphy_icon_3.png",
+			"images/calligraphy_icon_2.png",
+			"images/calligraphy_icon_1.png",
+			"images/recommended_preview_2.jpg",
+			"images/user_img.jpg",
+			"images/recommended_preview_1.jpg",
+			"images/recommended_preview_6.jpg",
+			"js/mui.min.js",
+			"css/app.css",
+			"css/mui.min.css",
+			"images/recommended_preview_5.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/recommended_preview_3.jpg",
+			"images/jx_title.jpg",
+			"calligraphy_sub.html",
+			"images/b_btn_d_3.jpg",
+			"images/b_btn_s_1.jpg",
+			"fonts/mui.ttf",
+			"index.html",
+			"images/header.jpg",
+			"images/b_btn_d_4.jpg",
+			"images/b_btn_d_5.jpg",
+			"images/b_btn_d_2.jpg"
+		],
+		"refer": [
+			"content.html",
+			"calligraphy_sub.html",
+			"community.html",
+			"me.html",
+			"index.html",
+			"daily_list.html",
+			"calligraphy_5.html",
+			"calligraphy_4.html",
+			"calligraphy_8.html",
+			"calligraphy_7.html",
+			"calligraphy_9.html",
+			"calligraphy_6.html",
+			"video_list.html",
+			"database.html"
+		]
+	},
+	"community.html": {
+		"resources": [
+			"images/user_img2.png",
+			"images/zan.png",
+			"images/huifu.png",
+			"content.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/recommended_preview_3.jpg",
+			"images/huifu2.png",
+			"images/recommended_preview_2.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/zan2.png",
+			"images/recommended_preview_1.jpg",
+			"index.html",
+			"images/user_img.jpg",
+			"images/fb_btn.png",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"content.html",
+			"index.html"
+		]
+	},
+	"bizhi.html": {
+		"resources": [
+			"images/bizhi_5.png",
+			"images/bizhi_3.png",
+			"images/bizhi_1.png",
+			"images/bizhi_6.png",
+			"images/bizhi_2.png",
+			"images/bizhi_4.png",
+			"bizhi_sub.html",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"bizhi_sub.html"
+		]
+	},
+	"me.html": {
+		"resources": [
+			"images/user_img2.png",
+			"fonts/mui.ttf",
+			"images/line.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/recommended_preview_2.jpg",
+			"images/user_img.jpg",
+			"images/recommended_preview_1.jpg",
+			"images/recommended_preview_6.jpg",
+			"images/recommended_preview_5.jpg",
+			"images/recommended_preview_3.jpg",
+			"images/recommended_preview_4.jpg",
+			"images/jx_title.jpg",
+			"images/jx_title2.jpg",
+			"js/app.js",
+			"js/mui.enterfocus.js",
+			"images/seting.png",
+			"images/sinaweibo.png",
+			"images/weixin.png",
+			"images/qq.png",
+			"images/delet.png",
+			"js/jquery.min.js"
+		],
+		"refer": [
+			"content.html",
+			"setting.html",
+			"index.html",
+			"login.html",
+			"collection.html"
+		]
+	},
+	"daily_listsub.html": {
+		"resources": [
+			"images/daily_banner.jpg",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"daily_contentl.html"
+		]
+	},
+	"daily_contentl.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"daily_contentl_sub.html",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"daily_detaile.html",
+			"daily_contentl_sub.html",
+			"release.html"
+		]
+	},
+	"daily_content_sub.html": {
+		"resources": [
+			"images/daily_list.jpg",
+			"images/daily_title.jpg",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/user_img.jpg",
+			"images/jx_title.jpg",
+			"images/recommended_preview_1.jpg"
+		],
+		"refer": [
+			"content.html",
+			"daily_list.html",
+			"daily_detaile.html"
+		]
+	},
+	"daily_contentl_sub.html": {
+		"refer": [
+			"content.html",
+			"daily_detaile.html"
+		],
+		"resources": [
+			"images/daily_title.jpg",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/jx_title.jpg"
+		]
+	},
+	"content_sub.html": {
+		"resources": [
+			"images/user_img2.png",
+			"images/zan_icon.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/zan_bg.png",
+			"images/line.png",
+			"images/zan.png",
+			"images/comments_title.png",
+			"images/user_img.jpg/",
+			"js/app.js",
+			"js/mui.zoom.js",
+			"images/bizhi_3.png",
+			"images/article_content.png",
+			"images/bizhi_1.png",
+			"images/bizhi_2.png",
+			"images/bizhi_4.png",
+			"js/mui.previewimage.js"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"calligraphy_list_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"images/iline_shufa.jpg",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"content.html"
+		]
+	},
+	"bizhi_sub.html": {
+		"resources": [
+			"images/bizhi_1.png",
+			"images/bizhi_5.png",
+			"images/bizhi_3.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"images/bizhi_6.png",
+			"images/bizhi_2.png",
+			"css/mui.min.css",
+			"images/bizhi_4.png"
+		],
+		"refer": [
+			"bizhi_content.html"
+		]
+	},
+	"calligraphy_sub.html": {
+		"resources": [
+			"images/calligraphy_icon_5.png",
+			"images/calligraphy_icon_4.png",
+			"images/calligraphy_icon_6.png",
+			"images/calligraphy_icon_8.png",
+			"images/calligraphy_icon_7.png",
+			"images/calligraphy_icon_3.png",
+			"images/calligraphy_icon_2.png",
+			"images/calligraphy_icon_1.png"
+		],
+		"refer": [
+			"calligraphy_list.html",
+			"daily_list.html",
+			"bizhi.html",
+			"calligraphy_5.html",
+			"calligraphy_4.html",
+			"calligraphy_6.html",
+			"calligraphy_9.html",
+			"calligraphy_8.html",
+			"calligraphy_7.html",
+			"video_list.html"
+		]
+	},
+	"calligraphy_5.html": {
+		"resources": [
+			"calligraphy_5_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_5_sub.html"
+		]
+	},
+	"calligraphy_4.html": {
+		"resources": [
+			"calligraphy_4_sub.html",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_4_sub.html"
+		]
+	},
+	"calligraphy_6.html": {
+		"resources": [
+			"calligraphy_6_sub.html",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_6_sub.html"
+		]
+	},
+	"calligraphy_9.html": {
+		"resources": [
+			"calligraphy_9_sub.html",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_9_sub.html"
+		]
+	},
+	"calligraphy_8.html": {
+		"resources": [
+			"calligraphy_8_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_8_sub.html"
+		]
+	},
+	"calligraphy_7.html": {
+		"resources": [
+			"calligraphy_7_sub.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"calligraphy_7_sub.html"
+		]
+	},
+	"calligraphy_5_sub.html": {
+		"refer": [
+			"content.html",
+			"database_content.html"
+		],
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"calligraphy_8_sub.html": {
+		"refer": [
+			"content.html",
+			"database_content.html"
+		],
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"calligraphy_7_sub.html": {
+		"refer": [
+			"content.html",
+			"database_content.html"
+		],
+		"resources": []
+	},
+	"calligraphy_4_sub.html": {
+		"refer": [
+			"content.html",
+			"database_content.html"
+		],
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"chinadraw.html": {
+		"refer": [
+			"content.html",
+			"index.html"
+		],
+		"resources": [
+			"images/user_img.jpg",
+			"images/recommended_preview_1.jpg",
+			"index.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		]
+	},
+	"video_list_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/video_list.png"
+		],
+		"refer": [
+			"video_content.html"
+		]
+	},
+	"video_content_sub.html": {
+		"resources": [
+			"images/zan_icon.png",
+			"images/zan_bg.png",
+			"images/comments_title.png",
+			"images/zan.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/video_list.png",
+			"js/app.js"
+		],
+		"refer": []
+	},
+	"main.html": {
+		"refer": [
+			"setting.html"
+		],
+		"resources": []
+	},
+	"login.html": {
+		"refer": [
+			"main.html",
+			"index.html",
+			"unlock.html",
+			"me.html"
+		],
+		"resources": [
+			"images/sinaweibo.png",
+			"images/weixin.png",
+			"images/qq.png",
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/mui.enterfocus.js",
+			"css/style.css"
+		]
+	},
+	"setting.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"js/mui.locker.js",
+			"js/feedback.js",
+			"css/feedback-page.css",
+			"js/feedback-page.js",
+			"js/mui.view.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"index2.html"
+		]
+	},
+	"unlock.html": {
+		"resources": [
+			"js/mui.locker.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"main.html",
+			"me.html",
+			"index.html",
+			"login.html",
+			"index2.html"
+		]
+	},
+	"index2.html": {
+		"resources": [
+			"calligraphy.html",
+			"images/header.jpg",
+			"images/b_btn_d_1.jpg",
+			"images/b_btn_s_3.jpg",
+			"images/b_btn_d_4.jpg",
+			"images/b_btn_d_5.jpg",
+			"images/b_btn_d_2.jpg",
+			"images/b_btn_s_2.jpg",
+			"images/b_btn_d_3.jpg",
+			"images/b_btn_s_1.jpg",
+			"images/b_btn_s_4.jpg",
+			"images/b_btn_s_5.jpg",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"daily.html",
+			"fonts/mui.ttf",
+			"images/fb_btn.png",
+			"images/header.png",
+			"images/logoz.png"
+		],
+		"refer": [
+			"community.html",
+			"me.html",
+			"daily.html",
+			"chinadraw.html",
+			"calligraphy.html",
+			"login.html",
+			"fb_choose.html"
+		]
+	},
+	"release.html": {
+		"resources": [
+			"release_sub.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/app.css",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"release_sub.html"
+		]
+	},
+	"release_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/feedback-page.css",
+			"fonts/mui.ttf",
+			"images/iconfont-tianjia.png",
+			"js/oss/upload.js",
+			"js/oss/crypto.js",
+			"js/oss/hmac.js",
+			"js/oss/plupload.full.min.js",
+			"js/oss/base64.js",
+			"js/oss/sha1.js",
+			"images/article_content.png",
+			"js/mui.zoom.js",
+			"js/mui.previewimage.js",
+			"images/close.png",
+			"images/b_btn_s_2.jpg",
+			"js/jquery.min.js",
+			"images/delet.png",
+			"js/app.js"
+		]
+	},
+	"fb_choose.html": {
+		"resources": [
+			"images/choose2.png",
+			"fonts/mui.ttf",
+			"images/choose1.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/app.js"
+		],
+		"refer": [
+			"release.html"
+		]
+	},
+	"database.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/webviewGroup.js",
+			"database_1.html",
+			"database_3.html"
+		],
+		"refer": [
+			"database_1.html",
+			"database_3.html",
+			"database_5.html",
+			"database_4.html",
+			"database_2.html",
+			"database_8.html",
+			"database_7.html",
+			"database_6.html"
+		]
+	},
+	"database_1.html": {
+		"resources": [
+			"database_1_sub.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_1_sub.html"
+		]
+	},
+	"database_3.html": {
+		"resources": [
+			"database_3_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_3_sub.html"
+		]
+	},
+	"database_4.html": {
+		"resources": [
+			"database_4_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_4_sub.html"
+		]
+	},
+	"database_2.html": {
+		"resources": [
+			"database_2_sub.html",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_2_sub.html"
+		]
+	},
+	"database_5.html": {
+		"resources": [
+			"database_5_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_5_sub.html"
+		]
+	},
+	"database_6.html": {
+		"resources": [
+			"database_6_sub.html"
+		],
+		"refer": [
+			"database_6_sub.html"
+		]
+	},
+	"database_8.html": {
+		"resources": [
+			"database_8_sub.html"
+		],
+		"refer": [
+			"database_8_sub.html"
+		]
+	},
+	"database_7.html": {
+		"resources": [
+			"database_7_sub.html"
+		],
+		"refer": [
+			"database_7_sub.html"
+		]
+	},
+	"database_1_sub.html": {
+		"resources": [
+			"images/line.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/bizhi_1.png",
+			"images/recommended_preview_1.jpg",
+			"database_content.html"
+		],
+		"refer": [
+			"database_content.html"
+		]
+	},
+	"calligraphy_9_sub.html": {
+		"refer": [
+			"content.html",
+			"database_content.html"
+		],
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"database_2_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_content.html"
+		]
+	},
+	"database_content.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"images/zan_icon.png",
+			"js/mui.zoom.js",
+			"js/mui.pullToRefresh.material.js",
+			"images/zan_bg.png",
+			"js/mui.previewimage.js",
+			"images/comments_title.png",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"database_8_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_content.html"
+		]
+	},
+	"database_6_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"database_7_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"database_5_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"database_3_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"database_4_sub.html": {
+		"resources": [
+			"css/app.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_content.html"
+		]
+	},
+	"calligraphy_6_sub.html": {
+		"refer": [
+			"database_content.html"
+		]
+	},
+	"bizhi_content.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/bizhi_3.png",
+			"images/bizhi_1.png"
+		]
+	},
+	"collection.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"collection_sub.html"
+		],
+		"refer": [
+			"collection_sub.html"
+		]
+	},
+	"collection_sub.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": [
+			"database_content.html"
+		]
+	}
+}

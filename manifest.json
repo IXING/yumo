@@ -1,0 +1,1173 @@
+{
+	"@platforms": ["android", "iPhone", "iPad"],
+	"id": "H5DFF787C",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "雨墨",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.0.0",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "专注书法学习交流的APP",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		
+        
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        "Camera": {
+            "description": "访问摄像头"
+        },
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        
+        "Device": {
+            "description": "访问设备信息"
+        },
+        "Downloader": {
+            "description": "文件下载管理"
+        },
+        "Events": {
+            "description": "应用扩展事件"
+        },
+        
+        "Gallery": {
+            "description": "访问系统相册"
+        },
+        
+         "Invocation": {
+            "description": "使用Native.js能力"
+        },
+        
+        "Orientation": {
+            "description": "访问方向感应器"
+        },
+        
+        "Storage": {
+            "description": "管理应用本地数据"
+        },
+        
+        "Uploader": {
+            "description": "管理文件上传任务"
+        },
+        "Runtime": {
+            "description": "访问运行期环境"
+        },
+        "XMLHttpRequest": {
+            "description": "跨域网络访问"
+        },
+        "Zip": {
+            "description": "文件压缩与解压缩"
+        },
+        
+        
+        
+        "Webview":{
+        	"description": "窗口管理"
+        },
+        "NativeUI":{
+        	"description": "原生UI控件"
+        },
+        "Navigator":{
+        	"description": "浏览器信息"
+        },
+        "NativeObj":{
+        	"description": "原生对象"
+        },"File":{},"OAuth":{}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,"delay":"50"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {"plugins":{"oauth":{}},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.SET_WALLPAPER\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+			},
+			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"unpackage/res/icons/180x180.png","settings-retina8":"unpackage/res/icons/87x87.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
+					}
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": ""
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "C:/Users/Administrator/Desktop/启动页480.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/Administrator/Desktop/启动页720.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/Administrator/Desktop/启动页.png"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/header.jpg",
+					"css/app.css",
+					"images/daily_title.jpg",
+					"images/daily_banner.jpg",
+					"images/iline_shufa.jpg",
+					"images/iline_more.jpg",
+					"images/iline_bizhi.jpg",
+					"images/jx_title.jpg",
+					"images/iline_vodio.jpg",
+					"images/recommended_preview.jpg",
+					"images/user_img.jpg",
+					"images/recommended_preview_6.jpg",
+					"images/recommended_preview_2.jpg",
+					"images/recommended_preview_5.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/recommended_preview_3.jpg",
+					"images/recommended_preview_1.jpg",
+					"images/b_btn_d_1.jpg",
+					"images/b_btn_s_3.jpg",
+					"daily.html",
+					"fonts/mui.ttf",
+					"images/b_btn_d_4.jpg",
+					"images/b_btn_d_5.jpg",
+					"images/b_btn_d_2.jpg",
+					"images/b_btn_s_1.jpg",
+					"images/b_btn_d_3.jpg",
+					"images/b_btn_s_2.jpg",
+					"images/b_btn_s_4.jpg",
+					"images/b_btn_s_5.jpg",
+					"calligraphy.html",
+					"js/app.js",
+					"community.html",
+					"chinadraw.html"
+				],
+				"refer": [
+					"me.html",
+					"calligraphy_sub.html",
+					"login.html",
+					"unlock.html",
+					"index2.html"
+				],
+				"priority": 0
+			},
+			"daily.html": {
+				"resources": [
+					"images/iline_more.jpg",
+					"images/daily_banner.jpg",
+					"images/daily_title.jpg",
+					"images/recommended_preview_6.jpg",
+					"images/iline_shufa.jpg",
+					"images/recommended_preview_2.jpg",
+					"images/iline_bizhi.jpg",
+					"images/recommended_preview_5.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/recommended_preview_3.jpg",
+					"images/user_img.jpg",
+					"images/jx_title.jpg",
+					"images/recommended_preview_1.jpg",
+					"images/iline_vodio.jpg",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"daily_content.html",
+					"daily_sub.html",
+					"images/bizhi_5.png",
+					"images/bizhi_3.png",
+					"images/bizhi_6.png",
+					"images/bizhi_2.png",
+					"images/bizhi_1.png",
+					"images/bizhi_4.png",
+					"bizhi.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"calligraphy_list.html",
+					"content.html",
+					"video_list.html",
+					"database.html"
+				],
+				"priority": 0
+			},
+			"daily_content.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/daily_banner.jpg",
+					"images/daily_title.jpg",
+					"images/recommended_preview_2.jpg",
+					"images/user_img.jpg",
+					"images/recommended_preview_1.jpg",
+					"images/recommended_preview_6.jpg",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"images/recommended_preview_5.jpg",
+					"images/recommended_preview_3.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/jx_title.jpg",
+					"images/daily_list.jpg",
+					"daily_list.html",
+					"daily_detaile.html",
+					"daily_content_sub.html",
+					"js/app.js"
+				],
+				"refer": [
+					"release.html"
+				],
+				"priority": 0
+			},
+			"daily_list.html": {
+				"resources": [
+					"daily_content.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"daily_listsub.html",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"daily_detaile.html": {
+				"resources": [
+					"images/daily_list.jpg",
+					"images/daily_banner.jpg",
+					"images/daily_title.jpg",
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"daily_content.html",
+					"images/daily_banner2.jpg",
+					"images/close.png",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_list.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"calligraphy_list_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"content.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/user_img.jpg",
+					"images/user_img2.png",
+					"images/line.png",
+					"images/article_content.png",
+					"images/zan_icon.png",
+					"images/zan_bg.png",
+					"images/daily_title.jpg",
+					"images/comments_title.png",
+					"images/zan.png",
+					"images/huifu.png",
+					"community.html",
+					"content_sub.html",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"video_list.html": {
+				"resources": [
+					"images/daily_banner.jpg",
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"video_content.html",
+					"images/video_list.png",
+					"video_list_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"video_content.html": {
+				"resources": [
+					"video_list.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/video_list.png",
+					"images/user_img2.png",
+					"images/zan_icon.png",
+					"images/zan_bg.png",
+					"images/zan.png",
+					"images/comments_title.png",
+					"video_content_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy.html": {
+				"resources": [
+					"images/calligraphy_icon_5.png",
+					"images/calligraphy_icon_4.png",
+					"images/calligraphy_icon_6.png",
+					"images/calligraphy_icon_8.png",
+					"images/calligraphy_icon_7.png",
+					"images/calligraphy_icon_3.png",
+					"images/calligraphy_icon_2.png",
+					"images/calligraphy_icon_1.png",
+					"images/recommended_preview_2.jpg",
+					"images/user_img.jpg",
+					"images/recommended_preview_1.jpg",
+					"images/recommended_preview_6.jpg",
+					"js/mui.min.js",
+					"css/app.css",
+					"css/mui.min.css",
+					"images/recommended_preview_5.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/recommended_preview_3.jpg",
+					"images/jx_title.jpg",
+					"calligraphy_sub.html",
+					"images/b_btn_d_3.jpg",
+					"images/b_btn_s_1.jpg",
+					"fonts/mui.ttf",
+					"index.html",
+					"images/header.jpg",
+					"images/b_btn_d_4.jpg",
+					"images/b_btn_d_5.jpg",
+					"images/b_btn_d_2.jpg"
+				],
+				"refer": [
+					"content.html",
+					"community.html",
+					"me.html",
+					"daily_list.html",
+					"calligraphy_5.html",
+					"calligraphy_4.html",
+					"calligraphy_8.html",
+					"calligraphy_7.html",
+					"calligraphy_9.html",
+					"calligraphy_6.html",
+					"video_list.html",
+					"database.html"
+				],
+				"priority": 0
+			},
+			"community.html": {
+				"resources": [
+					"images/user_img2.png",
+					"images/zan.png",
+					"images/huifu.png",
+					"content.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/recommended_preview_3.jpg",
+					"images/huifu2.png",
+					"images/recommended_preview_2.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/zan2.png",
+					"images/recommended_preview_1.jpg",
+					"index.html",
+					"images/user_img.jpg",
+					"images/fb_btn.png",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"bizhi.html": {
+				"resources": [
+					"images/bizhi_5.png",
+					"images/bizhi_3.png",
+					"images/bizhi_1.png",
+					"images/bizhi_6.png",
+					"images/bizhi_2.png",
+					"images/bizhi_4.png",
+					"bizhi_sub.html",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"me.html": {
+				"resources": [
+					"images/user_img2.png",
+					"fonts/mui.ttf",
+					"images/line.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/recommended_preview_2.jpg",
+					"images/user_img.jpg",
+					"images/recommended_preview_1.jpg",
+					"images/recommended_preview_6.jpg",
+					"images/recommended_preview_5.jpg",
+					"images/recommended_preview_3.jpg",
+					"images/recommended_preview_4.jpg",
+					"images/jx_title.jpg",
+					"images/jx_title2.jpg",
+					"js/app.js",
+					"js/mui.enterfocus.js",
+					"images/seting.png",
+					"images/sinaweibo.png",
+					"images/weixin.png",
+					"images/qq.png",
+					"images/delet.png",
+					"js/jquery.min.js"
+				],
+				"refer": [
+					"content.html",
+					"setting.html",
+					"index.html",
+					"login.html",
+					"collection.html"
+				],
+				"priority": 0
+			},
+			"daily_listsub.html": {
+				"resources": [
+					"images/daily_banner.jpg",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"daily_contentl.html"
+				],
+				"priority": 0
+			},
+			"daily_contentl.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"daily_contentl_sub.html",
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"daily_detaile.html",
+					"release.html"
+				],
+				"priority": 0
+			},
+			"daily_content_sub.html": {
+				"resources": [
+					"images/daily_list.jpg",
+					"images/daily_title.jpg",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/user_img.jpg",
+					"images/jx_title.jpg",
+					"images/recommended_preview_1.jpg"
+				],
+				"refer": [
+					"content.html",
+					"daily_list.html",
+					"daily_detaile.html"
+				],
+				"priority": 0
+			},
+			"daily_contentl_sub.html": {
+				"resources": [
+					"images/daily_title.jpg",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/jx_title.jpg"
+				],
+				"refer": [
+					"content.html",
+					"daily_detaile.html"
+				],
+				"priority": 0
+			},
+			"content_sub.html": {
+				"resources": [
+					"images/user_img2.png",
+					"images/zan_icon.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/zan_bg.png",
+					"images/line.png",
+					"images/zan.png",
+					"images/comments_title.png",
+					"images/user_img.jpg/",
+					"js/app.js",
+					"js/mui.zoom.js",
+					"images/bizhi_3.png",
+					"images/article_content.png",
+					"images/bizhi_1.png",
+					"images/bizhi_2.png",
+					"images/bizhi_4.png",
+					"js/mui.previewimage.js"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_list_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"images/iline_shufa.jpg",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"content.html"
+				],
+				"priority": 0
+			},
+			"bizhi_sub.html": {
+				"resources": [
+					"images/bizhi_1.png",
+					"images/bizhi_5.png",
+					"images/bizhi_3.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"images/bizhi_6.png",
+					"images/bizhi_2.png",
+					"css/mui.min.css",
+					"images/bizhi_4.png"
+				],
+				"refer": [
+					"bizhi_content.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_sub.html": {
+				"resources": [
+					"images/calligraphy_icon_5.png",
+					"images/calligraphy_icon_4.png",
+					"images/calligraphy_icon_6.png",
+					"images/calligraphy_icon_8.png",
+					"images/calligraphy_icon_7.png",
+					"images/calligraphy_icon_3.png",
+					"images/calligraphy_icon_2.png",
+					"images/calligraphy_icon_1.png"
+				],
+				"refer": [
+					"calligraphy_list.html",
+					"daily_list.html",
+					"bizhi.html",
+					"calligraphy_5.html",
+					"calligraphy_4.html",
+					"calligraphy_6.html",
+					"calligraphy_9.html",
+					"calligraphy_8.html",
+					"calligraphy_7.html",
+					"video_list.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_5.html": {
+				"resources": [
+					"calligraphy_5_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_4.html": {
+				"resources": [
+					"calligraphy_4_sub.html",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_6.html": {
+				"resources": [
+					"calligraphy_6_sub.html",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_9.html": {
+				"resources": [
+					"calligraphy_9_sub.html",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_8.html": {
+				"resources": [
+					"calligraphy_8_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_7.html": {
+				"resources": [
+					"calligraphy_7_sub.html",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_5_sub.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"content.html",
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_8_sub.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"content.html",
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_7_sub.html": {
+				"resources": [],
+				"refer": [
+					"content.html",
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_4_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"content.html",
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"chinadraw.html": {
+				"resources": [
+					"images/user_img.jpg",
+					"images/recommended_preview_1.jpg",
+					"index.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"content.html"
+				],
+				"priority": 0
+			},
+			"video_list_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/video_list.png"
+				],
+				"refer": [
+					"video_content.html"
+				],
+				"priority": 0
+			},
+			"video_content_sub.html": {
+				"resources": [
+					"images/zan_icon.png",
+					"images/zan_bg.png",
+					"images/comments_title.png",
+					"images/zan.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/video_list.png",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"main.html": {
+				"resources": [],
+				"refer": [
+					"setting.html"
+				],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"images/sinaweibo.png",
+					"images/weixin.png",
+					"images/qq.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/mui.enterfocus.js",
+					"css/style.css"
+				],
+				"refer": [
+					"main.html",
+					"index.html",
+					"unlock.html",
+					"me.html"
+				],
+				"priority": 0
+			},
+			"setting.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.locker.js",
+					"js/feedback.js",
+					"css/feedback-page.css",
+					"js/feedback-page.js",
+					"js/mui.view.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"index2.html"
+				],
+				"priority": 0
+			},
+			"unlock.html": {
+				"resources": [
+					"js/mui.locker.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"main.html",
+					"me.html",
+					"index.html",
+					"login.html",
+					"index2.html"
+				],
+				"priority": 0
+			},
+			"index2.html": {
+				"resources": [
+					"calligraphy.html",
+					"images/header.jpg",
+					"images/b_btn_d_1.jpg",
+					"images/b_btn_s_3.jpg",
+					"images/b_btn_d_4.jpg",
+					"images/b_btn_d_5.jpg",
+					"images/b_btn_d_2.jpg",
+					"images/b_btn_s_2.jpg",
+					"images/b_btn_d_3.jpg",
+					"images/b_btn_s_1.jpg",
+					"images/b_btn_s_4.jpg",
+					"images/b_btn_s_5.jpg",
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"daily.html",
+					"fonts/mui.ttf",
+					"images/fb_btn.png",
+					"images/header.png",
+					"images/logoz.png"
+				],
+				"refer": [
+					"community.html",
+					"me.html",
+					"chinadraw.html",
+					"login.html",
+					"fb_choose.html"
+				],
+				"priority": 0
+			},
+			"release.html": {
+				"resources": [
+					"release_sub.html",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/app.css",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"release_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/feedback-page.css",
+					"fonts/mui.ttf",
+					"images/iconfont-tianjia.png",
+					"js/oss/upload.js",
+					"js/oss/crypto.js",
+					"js/oss/hmac.js",
+					"js/oss/plupload.full.min.js",
+					"js/oss/base64.js",
+					"js/oss/sha1.js",
+					"images/article_content.png",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"images/close.png",
+					"images/b_btn_s_2.jpg",
+					"js/jquery.min.js",
+					"images/delet.png",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"fb_choose.html": {
+				"resources": [
+					"images/choose2.png",
+					"fonts/mui.ttf",
+					"images/choose1.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/app.js"
+				],
+				"refer": [
+					"release.html"
+				],
+				"priority": 0
+			},
+			"database.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/webviewGroup.js",
+					"database_1.html",
+					"database_3.html"
+				],
+				"refer": [
+					"database_5.html",
+					"database_4.html",
+					"database_2.html",
+					"database_8.html",
+					"database_7.html",
+					"database_6.html"
+				],
+				"priority": 0
+			},
+			"database_1.html": {
+				"resources": [
+					"database_1_sub.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_3.html": {
+				"resources": [
+					"database_3_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_4.html": {
+				"resources": [
+					"database_4_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_2.html": {
+				"resources": [
+					"database_2_sub.html",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_5.html": {
+				"resources": [
+					"database_5_sub.html",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_6.html": {
+				"resources": [
+					"database_6_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_8.html": {
+				"resources": [
+					"database_8_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_7.html": {
+				"resources": [
+					"database_7_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_1_sub.html": {
+				"resources": [
+					"images/line.png",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/bizhi_1.png",
+					"images/recommended_preview_1.jpg",
+					"database_content.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"calligraphy_9_sub.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"content.html",
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"database_2_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"database_content.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/zan_icon.png",
+					"js/mui.zoom.js",
+					"js/mui.pullToRefresh.material.js",
+					"images/zan_bg.png",
+					"js/mui.previewimage.js",
+					"images/comments_title.png",
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_8_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"database_6_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_7_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_5_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_3_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"database_4_sub.html": {
+				"resources": [
+					"css/app.css",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"calligraphy_6_sub.html": {
+				"resources": [],
+				"refer": [
+					"database_content.html"
+				],
+				"priority": 0
+			},
+			"bizhi_content.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/bizhi_3.png",
+					"images/bizhi_1.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"collection.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"collection_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"collection_sub.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [
+					"database_content.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.js",
+				"css/mui.css"
+			]
+		}
+	}
+}
