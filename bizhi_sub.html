@@ -89,7 +89,7 @@
 						var list = document.getElementById("hot");
 						mui.each(obo, function(index, item) {
 							var cid = item.id,
-								cbizhi_yimg = item.yimg;
+								cbizhi_yimg = item.cimg + '?x-oss-process=image/resize,m_fill,h_533,w_300,limit_0';
 							maxid = cid;
 							odiv = document.createElement('li');
 							odiv.className = 'bizhi_list';
@@ -132,7 +132,7 @@
 						var list = document.getElementById("hot");
 						mui.each(obo, function(index, item) {
 							var cid = item.id,
-								cbizhi_yimg = item.yimg;
+								cbizhi_yimg = item.cimg + '?x-oss-process=image/resize,m_fill,h_533,w_300,limit_0';
 							odiv = document.createElement('li');
 							odiv.className = 'bizhi_list';
 							odiv.innerHTML = '<div class="bizhi_list_p">' +
