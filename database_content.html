@@ -29,6 +29,9 @@
 
 							</div>
 						</div>
+						<div class="copyright">
+							版权声明：本APP的资料内容均来自网络，目的是为了让大家更好的学习与交流，请不要用于商业用户，如有版权问题请联系客服管理，会为您尽快删除，谢谢。
+						</div>
 					</div>
 				</div>
 			</div>
@@ -44,9 +47,6 @@
 			mui.init();
 			var self = plus.webview.currentWebview();
 			var contentid = self.contentid;
-			var state = app.getState();
-			var user_id = state.account.id; //作者id
-			var fzz; //1未收藏    2收藏
 			// 开启一直保持程序唤醒状态
 			plus.device.setWakelock(true);
 			var url = "http://www.zjliang.com/index.php/Gapi/Database/content.html";
@@ -74,6 +74,10 @@
 					console.log(type);
 				}
 			});
+			var state = app.getState();
+			var user_id = state.account.id; //作者id
+			var fzz; //1未收藏    2收藏
+
 			//			判断是否收藏
 			var collection = document.getElementById('collection_log');
 			var url = "http://www.zjliang.com/index.php/Gapi/Collection/addpd.html/";

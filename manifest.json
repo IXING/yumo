@@ -81,12 +81,12 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        },"File":{},"OAuth":{}
+        },"File":{}
 	},
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true,"delay":"50"
+			"waiting": false,"delay":"0"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -163,9 +163,7 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/Administrator/Desktop/启动页480.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/Administrator/Desktop/启动页720.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/Administrator/Desktop/启动页.png"
+					"hdpi": "C:/Users/Administrator/Desktop/启动页480.png"
 				}
 			}
 		}
@@ -597,7 +595,8 @@
 					"css/mui.min.css"
 				],
 				"refer": [
-					"content.html"
+					"content.html",
+					"content_jc.html"
 				],
 				"priority": 0
 			},
@@ -1160,6 +1159,33 @@
 				"refer": [
 					"database_content.html"
 				],
+				"priority": 0
+			},
+			"content_jc.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"images/zan_icon.png",
+					"js/mui.zoom.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.min.css",
+					"images/line.png",
+					"images/zan_bg.png",
+					"js/mui.previewimage.js",
+					"images/comments_title.png"
+				],
+				"refer": [
+					"content_jc_link.html"
+				],
+				"priority": 0
+			},
+			"content_jc_link.html": {
+				"resources": [
+					"js/common.js",
+					"css/common.css",
+					"js/immersed.js",
+					"js/jquery.min.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
