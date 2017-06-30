@@ -21,7 +21,7 @@
 			</div>
 			<div class="daily_banner_box">
 				<div class="daily_banner_p">
-					<a id="daily_detaileurl" data-id="" href="">
+					<a id="daily_detaileurl" data-id="" href="daily_detaile.html">
 						<div class="daily_banner">
 							<img id="daily_yimg" src="" />
 						</div>
@@ -116,15 +116,18 @@
 				success: function(data) {
 					var obo = eval(data);
 					var cid = obo[0].id;
-					var cdaily_yimg = obo[0].yimg;
+//					var cdaily_yimg = obo[0].yimg;
 					var cdaily_cimg = obo[0].cimg;
 					var cdaily_title = obo[0].title;
 					var cdaily_time = obo[0].time;
 					var cdaily_browse = obo[0].browse;
 					var cdaily_comments = obo[0].comments;
-					var cdaily_detaileurl = obo[0].detaileurl;
+//					var cdaily_detaileurl = obo[0].detaileurl;
 					var cdaily_zhuozhe = obo[0].zhuozhe;
-					
+
+					var yimg_url = '?x-oss-process=image/rotate,270/resize,m_fill,h_361,w_688,limit_0';
+					var cdaily_yimg = cdaily_cimg + yimg_url;
+
 					contentimg = cdaily_cimg;
 					
 					var odaily_yimg = document.getElementById("daily_yimg");
@@ -140,7 +143,7 @@
 					odaily_time.innerHTML = cdaily_time;
 					odaily_browse.innerHTML = cdaily_browse;
 					odaily_comments.innerHTML = cdaily_comments;
-					odaily_detaileurl.href = cdaily_detaileurl;
+//					odaily_detaileurl.href = cdaily_detaileurl;
 					odaily_detaileurl.dataset.id = cid;
 					odaily_zhuozhe.innerHTML = cdaily_zhuozhe;
 				},

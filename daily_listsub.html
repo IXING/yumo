@@ -37,6 +37,7 @@
 			var ifirst = 0;
 			var ilast = 10;
 			var maxid = 0;
+			var yimg_url = '?x-oss-process=image/rotate,270/resize,m_fill,h_361,w_688,limit_0';
 			var url = "http://www.zjliang.com/index.php/Gapi/daily/olist.html";
 			mui.ajax(url, {
 				data: {
@@ -52,7 +53,7 @@
 					var list = document.getElementById("hot");
 					mui.each(obo, function(index, item) {
 						var cid = item.id,
-							cdaily_yimg = item.yimg,
+							cdaily_yimg = item.cimg + yimg_url,
 							cdaily_title = item.title,
 							cdaily_time = item.time,
 							cdaily_browse = item.browse,
@@ -108,7 +109,7 @@
 							//							var macidl = obo.length;
 							mui.each(obo, function(index, item) {
 								var cid = item.id,
-									cdaily_yimg = item.yimg,
+									cdaily_yimg =  item.cimg + yimg_url,
 									cdaily_title = item.title,
 									cdaily_time = item.time,
 									cdaily_browse = item.browse,
@@ -172,7 +173,7 @@
 							var list = document.getElementById("hot");
 							mui.each(obo, function(index, item) {
 								var cid = item.id,
-									cdaily_yimg = item.yimg,
+									cdaily_yimg =  item.cimg + yimg_url,
 									cdaily_title = item.title,
 									cdaily_time = item.time,
 									cdaily_browse = item.browse,

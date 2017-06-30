@@ -25,7 +25,7 @@
 					</div>
 					<div class="daily_banner_box">
 						<div class="daily_banner_p">
-							<a id="daily_curl" data-id="" href="">
+							<a id="daily_curl" data-id="" href="daily_content.html">
 								<div class="daily_banner">
 									<img id="daily_yimg" src="" />
 								</div>
@@ -169,13 +169,17 @@
 			success: function(data) {
 				var obo = eval(data);
 				var cid = obo[0].id;
-				var cdaily_yimg = obo[0].yimg;
+//				var cdaily_yimg = obo[0].yimg;
 				var cdaily_title = obo[0].title;
 				var cdaily_time = obo[0].time;
 				var cdaily_browse = obo[0].browse;
 				var cdaily_comments = obo[0].comments;
-				var cdaily_curl = obo[0].curl;
-
+				var cdaily_cimg = obo[0].cimg;
+				
+				var yimg_url = '?x-oss-process=image/rotate,270/resize,m_fill,h_361,w_688,limit_0';
+				var cdaily_yimg = cdaily_cimg + yimg_url;
+				  
+				 
 				var odaily_yimg = document.getElementById("daily_yimg");
 				var odaily_title = document.getElementById("daily_title");
 				var odaily_time = document.getElementById("daily_time");
@@ -187,7 +191,7 @@
 				odaily_time.innerHTML = cdaily_time;
 				odaily_browse.innerHTML = cdaily_browse;
 				odaily_comments.innerHTML = cdaily_comments;
-				odaily_curl.href = cdaily_curl;
+//				odaily_curl.href = cdaily_curl;
 				odaily_curl.dataset.id = cid;
 			},
 			error: function(xhr, type, errorThrown) {
